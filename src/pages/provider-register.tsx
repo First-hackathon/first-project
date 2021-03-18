@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import Stripe from "stripe"
+import StripeAPI from "stripe"
 import axios from "axios"
 
 const hostUrl = "http://localhost:3000"
@@ -21,7 +21,7 @@ const ProviderRegister: React.VFC<null> = () => {
   const createAccount = async () => {
     try {
       // アカウント作成
-      const createParams: Stripe.AccountCreateParams = {
+      const createParams: StripeAPI.AccountCreateParams = {
         type: "express",
         country: "JP"
       }
@@ -31,12 +31,13 @@ const ProviderRegister: React.VFC<null> = () => {
         axiosParams.append(key, createParams[key])
       })
       let response = await axiosInstance.post("https://api.stripe.com/v1/accounts", axiosParams)
+      const account: StripeAPI.Account = response.data
       //TODO: 全体を状態管理しているやつにstripeのアカウントIDを保存
 
       // アカウント登録リンク生成
       //TODO: refresh_urlとreturn_urlを設定
-      const linkParams: Stripe.AccountLinkCreateParams = {
-        account: response.data.id,
+      const linkParams: StripeAPI.AccountLinkCreateParams = {
+        account: account.id,
         refresh_url: `${hostUrl}/reauth`,
         return_url: `${hostUrl}/return`,
         type: "account_onboarding"
@@ -46,9 +47,10 @@ const ProviderRegister: React.VFC<null> = () => {
         axiosParams.append(key, linkParams[key])
       })
       response = await axiosInstance.post("https://api.stripe.com/v1/account_links", axiosParams)
+      const accountLink: StripeAPI.AccountLink = response.data
 
       //リンクへリダイレクト
-      await router.push(response.data.url)
+      await router.push(accountLink.url)
     } catch (e) {
       console.log(e)
       // TODO: エラーハンドリング
