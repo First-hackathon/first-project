@@ -1,5 +1,5 @@
-import { User } from "firebase"
-import { FC, createContext, useEffect, useState } from "react"
+import { User } from "@firebase/firestore/dist/firestore/src/auth/user"
+import { React, createContext, useEffect, useState } from "react"
 
 import firebase from "../utils/firebase"
 
@@ -7,9 +7,13 @@ type AuthContextProps = {
   currentUser: User | null | undefined
 }
 
+type Props = {
+  children: JSX.Element
+}
+
 const AuthContext = createContext<AuthContextProps>({ currentUser: undefined })
 
-const Auth: FC = ({ children }) => {
+const Auth: React.VFC<Props> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null | undefined>(undefined)
 
   useEffect(() => {

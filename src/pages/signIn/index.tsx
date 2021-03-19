@@ -1,9 +1,9 @@
-import { FC, useEffect, useContext } from "react"
+import { useEffect, useContext, React } from "react"
 import Router from "next/router"
 import firebase from "../../utils/firebase"
 import { AuthContext } from "../../auth/auth"
 
-const Index: FC = () => {
+const Index: React.VFC<null> = () => {
   const { currentUser } = useContext(AuthContext)
 
   useEffect(() => {
