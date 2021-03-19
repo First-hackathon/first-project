@@ -188,6 +188,11 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.1.tgz#9daf5745156fd84b8e9889a2dc721f0c58e894aa"
   integrity sha512-CAEbWH7OIur6jEOzaai83jq3FmKmv4PmX1JYfs9IrYcGEVI/lyL1EXJGCj7eFVJ0bg5QR8LMxBlEtA+xKiLpFw==
 
+"@interactjs/types@1.10.8":
+  version "1.10.8"
+  resolved "https://registry.yarnpkg.com/@interactjs/types/-/types-1.10.8.tgz#098da479de9c5ac9c8ba97d113746b7dcd9c2204"
+  integrity sha512-qU2QfnN7r8AU4mSd2W3XmRtR0d35R1PReIT9b5YzpNLX9S0OQgNBLrEEFyXpa9alq/9h6wYNIwPCVAsknF5uZw==
+
 "@next/env@10.0.9":
   version "10.0.9"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-10.0.9.tgz#455fd364c8a5ee012b2cd4406d5294164990706d"
@@ -1860,6 +1865,13 @@ inherits@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
   integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=
+
+interactjs@^1.10.8:
+  version "1.10.8"
+  resolved "https://registry.yarnpkg.com/interactjs/-/interactjs-1.10.8.tgz#a85b6e89ebf2ed88ea1678287ffcf0becf0dfb1c"
+  integrity sha512-hIU82lF9mplmAHVTUmZbHMHKm96AwlD0zWGuf9krKt2dhALHsMOdU+yVilPqIv1VpNAGV66F9B14Rfs4ulS2nA==
+  dependencies:
+    "@interactjs/types" "1.10.8"
 
 internal-slot@^1.0.3:
   version "1.0.3"
