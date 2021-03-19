@@ -10,34 +10,41 @@ const Index: React.FC = () => {
   }
 
   return (
-    <div className="App">
-      <button onClick={() => interact.enable()} className={"m-1 p-1 bg-red-400 rounded text-white"}>
-        編集
-      </button>
-      <button
-        onClick={() => interact.disable()}
-        className={"m-1 p-1 bg-blue-400 rounded text-white"}
-      >
-        保存
-      </button>
-      <input type="file" name="photo" id="file" accept="image/*" onChange={handleChangeFile} />
-      <div>
-        (x, y) = ({interact.position.x}, {interact.position.y})
+    <div className={"flex"}>
+      <div className={"w-1/4"}>
+        <button
+          onClick={() => interact.enable()}
+          className={"m-1 p-1 bg-red-400 rounded text-white"}
+        >
+          編集
+        </button>
+        <button
+          onClick={() => {
+            interact.disable()
+          }}
+          className={"m-1 p-1 bg-blue-400 rounded text-white"}
+        >
+          保存(固定)
+        </button>
+        <input type="file" name="photo" id="file" accept="image/*" onChange={handleChangeFile} />
+        <div>
+          (x, y) = ({interact.position.x}, {interact.position.y})
+        </div>
+        <div>あなたのステッカー欄</div>
+        <img
+          ref={interact.ref}
+          src={preview}
+          style={{
+            ...interact.style
+          }}
+        />
       </div>
-      {console.log(interact.position)}
-      <img
-        ref={interact.ref}
-        src={preview}
-        style={{
-          ...interact.style
-        }}
-      />
-      <img
-        src={
-          "https://www.nojima.co.jp/support/wp-content/uploads/2020/09/347091c6d5762a65daa20996977c6d10.jpg"
-        }
-        className={"m-auto h-2/3 w-2/3"}
-      />
+      <div className={"w-3/4"}>
+        <img
+          src={"https://img1.kakaku.k-img.com/images/productimage/fullscale/K0001158507_0004.jpg"}
+          className={"m-auto h-3/4"}
+        />
+      </div>
     </div>
   )
 }

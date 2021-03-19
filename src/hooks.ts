@@ -6,8 +6,6 @@ type Partial<T> = {
 }
 
 const initPosition = {
-  width: 200,
-  height: 200,
   x: 0,
   y: 0
 }
@@ -26,42 +24,18 @@ export function useInteractJS(position: Partial<typeof initPosition> = initPosit
   const [isEnabled, setEnable] = useState(true)
 
   const interactRef = useRef(null)
-  let { x, y, width, height } = _position
-
-  // useEffect(() => {
-  //   console.log("x, y = ", x, y)
-  // })
+  let { x, y } = _position
   const enable = () => {
     interact((interactRef.current as unknown) as HTMLElement)
       .draggable({
-        inertia: false
-      })
-      .resizable({
-        // resize from all edges and corners
-        edges: { left: true, right: true, bottom: true, top: true },
-        preserveAspectRatio: false,
         inertia: false
       })
       .on("dragmove", (event) => {
         x += event.dx
         y += event.dy
         setPosition({
-          width,
-          height,
           x,
           y
-        })
-      })
-      .on("resizemove", (event) => {
-        width = event.rect.width
-        height = event.rect.height
-        x += event.deltaRect.left
-        y += event.deltaRect.top
-        setPosition({
-          x,
-          y,
-          width,
-          height
         })
       })
   }
@@ -86,8 +60,7 @@ export function useInteractJS(position: Partial<typeof initPosition> = initPosit
     ref: interactRef,
     style: {
       transform: `translate3D(${_position.x}px, ${_position.y}px, 0)`,
-      width: _position.width + "px",
-      height: _position.height + "px",
+      width: "200px",
       position: "absolute" as CSSProperties["position"]
     },
     position: _position,
