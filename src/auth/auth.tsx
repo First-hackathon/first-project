@@ -1,4 +1,4 @@
-import { User } from "@firebase/firestore/dist/firestore/src/auth/user"
+import { User } from "firebase/auth/dist/index.esm"
 import React, { createContext, useEffect, useState } from "react"
 
 import firebase from "../utils/firebase"
