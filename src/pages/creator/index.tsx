@@ -3,15 +3,15 @@ import StripeAPI from "stripe"
 import axios from "axios"
 import React from "react"
 
-const hostUrl = "http://localhost:3000"
-
 const Index: React.VFC<null> = () => {
+  const hostName = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"
+
   const router = useRouter()
 
   // HACK: StripeのSDK(import Stripe from "stripe")でうまく送信できないのでaxiosを使用
   // StripeのAPI用のインスタンスを生成
   const axiosInstance = axios.create({
-    baseURL: hostUrl,
+    baseURL: hostName,
     headers: {
       Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`
     },
@@ -39,8 +39,8 @@ const Index: React.VFC<null> = () => {
       //TODO: refresh_urlとreturn_urlを設定
       const linkParams: StripeAPI.AccountLinkCreateParams = {
         account: account.id,
-        refresh_url: `${hostUrl}/reauth`,
-        return_url: `${hostUrl}/return`,
+        refresh_url: `${hostName}/reauth`,
+        return_url: `${hostName}/return`,
         type: "account_onboarding"
       }
       axiosParams = new URLSearchParams()

@@ -12,8 +12,6 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { StatusCodes } from "http-status-codes"
 
-const hostUrl = "http://localhost:3000"
-
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const Index: React.VFC<{}> = () => {
@@ -29,6 +27,7 @@ const CardForm: React.VFC<{}> = () => {
   const elements = useElements()
   const [loading, setLoading] = React.useState<boolean>(false)
   const [buttonMessage, setButtonMessage] = React.useState<string>("PAY NOW")
+  const hostName = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"
 
   // TODO: 支払い先のaccountIdを設定
   const creatorId = "acct_1IWG3iPwhcz9FWG1"
@@ -40,7 +39,7 @@ const CardForm: React.VFC<{}> = () => {
   // HACK: StripeのSDK(import Stripe from "stripe")でうまく送信できないのでaxiosを使用
   // StripeのAPI用のインスタンスを生成
   const axiosInstance = axios.create({
-    baseURL: hostUrl,
+    baseURL: hostName,
     headers: {
       Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`
     },
