@@ -1,25 +1,27 @@
-import React, { useEffect } from "react"
 import { SnsShareButton, SnsType } from "../components/Button/snsShare"
 import { useRouter } from "next/router"
+import { MetaHead } from "../components/Head"
+import React from "react"
 
 const TestSnsShareButton: React.FC = () => {
-  // const [setCurrentUrlState, CurrentUrlState] = useState<string>("")
   const router = useRouter()
-  const baseUrl = "http://example.com"
+  const baseUrl = "http://stickers-staging.vercel.app"
   const currentUrl: string = baseUrl + router.pathname
-  const imgUrl = "https://thumb.photo-ac.com/a9/a9e8d7bcc93603347b5ae99dad27538e_t.jpeg"
-
-  useEffect(() => {
-    console.log(location.href)
-  }, [])
-
+  const image1 = "https://images-na.ssl-images-amazon.com/images/I/615Czv1hTLL.jpg"
   return (
     <>
+      <MetaHead
+        title={"テストテスト"}
+        description={"テストテスト"}
+        keyword={"キーワード"}
+        image={image1}
+        url={currentUrl}
+      />
       <div className={"flex"}>
-        <img src={imgUrl} alt="alt-text" style={{ width: "600px" }} />
-        <SnsShareButton url={currentUrl} snsType={SnsType.Twitter} />
-        <SnsShareButton url={currentUrl} snsType={SnsType.Facebook} quote={"google検索"} />
-        <SnsShareButton url={"https://github.co.jp/"} snsType={SnsType.Line} title={"google検索"} />
+        <img src={image1} alt="alt-text" style={{ width: "600px" }} />
+        <SnsShareButton url={currentUrl} snsType={SnsType.Twitter} title={"OGP test"} />
+        <SnsShareButton url={currentUrl} snsType={SnsType.Facebook} quote={"OGP test"} />
+        <SnsShareButton url={currentUrl} snsType={SnsType.Line} title={"OGP test"} />
       </div>
     </>
   )
