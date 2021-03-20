@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { useInteractJS } from "../../hooks"
-const Images = require("../../public/pc.jpg")
 
 const Index: React.VFC = () => {
   const interact = useInteractJS()
@@ -17,16 +16,26 @@ const Index: React.VFC = () => {
     const canvasContext = canvas.getContext("2d")
     setContext(canvasContext)
   })
+
+  const createImage = (url) =>
+    new Promise<HTMLImageElement>((resolve, reject) => {
+      const image = new Image()
+      image.addEventListener("load", () => {
+        context.drawImage(image, 0, 0)
+        resolve(image)
+      })
+      image.addEventListener("error", (error) => reject(error))
+      image.setAttribute("crossOrigin", "anonymous") // needed to avoid cross-origin issues on CodeSandbox
+      image.src = url
+    })
   // 状態にコンテキストが登録されたらそれに対して操作できる
   useEffect(() => {
-    if (context !== null) {
-      const img = new Image()
-      img.src = Images
-      img.onload = () => {
-        // PCを描画
-        context.drawImage(img, 0, 0)
+    ;(async () => {
+      if (context !== null) {
+        const img = await createImage("/pc.jpg")
+        console.log(img)
       }
-    }
+    })()
   }, [context])
 
   // ステッカーをPCに貼り付け
