@@ -27,7 +27,7 @@ const TestSnsShareButton: React.FC = () => {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="twitter:site" content="@sota35163013" />
-        <meta property="og:image" key="ogImage" content={"../public/images/opgTestCat.jpg"} />
+        <meta property="og:image" key="ogImage" content={image1} />
         <meta name="twitter:card" key="twitterCard" content={image1} />
         <meta name="twitter:image" key="twitterImage" content={currentUrl} />
         <meta name="twitter:title" content="テストテストテストテストテストテスト" />
