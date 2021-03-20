@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useInteractJS } from "../../hooks"
 const Images = require("../../public/pc.jpg")
-// const Images = require("../../public/pc.svg")
 
-const Index: React.FC = () => {
+const Index: React.VFC = () => {
   const interact = useInteractJS()
   const [preview, setPreview] = useState("")
   const handleChangeFile = (e) => {
@@ -14,7 +13,7 @@ const Index: React.FC = () => {
   const [context, setContext] = useState(null)
   // コンポーネントの初期化完了後コンポーネント状態にコンテキストを登録
   useEffect(() => {
-    const canvas = document.getElementById("canvas")
+    const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
     const canvasContext = canvas.getContext("2d")
     setContext(canvasContext)
   })
