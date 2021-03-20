@@ -1,5 +1,17 @@
-module.exports = {
+const path = require("path")
+const withPlugins = require("next-compose-plugins")
+const optimizedImages = require("next-optimized-images")
+
+const nextConfig = {
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "~": path.resolve(__dirname, "./src")
+    }
+    return config
+  },
   env: {
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
     FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
     FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
@@ -10,3 +22,16 @@ module.exports = {
     FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID
   }
 }
+
+module.exports = withPlugins(
+  [
+    [
+      optimizedImages,
+      {
+        handleImages: ["jpeg", "png", "svg", "webp", "ico", "gif"],
+        inlineImageLimit: -1
+      }
+    ]
+  ],
+  nextConfig
+)
