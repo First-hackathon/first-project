@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react"
 import Router from "next/router"
-import firebase from "../../utils/firebase"
+import firebase, { auth } from "../../utils/firebase"
 import { AuthContext } from "../../auth/auth"
 
 const Index: React.VFC<null> = () => {
@@ -12,7 +12,7 @@ const Index: React.VFC<null> = () => {
 
   const login = () => {
     const provider = new firebase.auth.GoogleAuthProvider()
-    firebase.auth().signInWithRedirect(provider)
+    auth.signInWithRedirect(provider)
   }
   return (
     <div className="container">
