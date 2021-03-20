@@ -1,7 +1,8 @@
-import { User } from "@firebase/firestore/dist/firestore/src/auth/user"
-import { React, createContext, useEffect, useState } from "react"
+import { User } from "firebase/auth/dist/index.esm"
+import React, { createContext, useEffect, useState } from "react"
 
 import firebase from "../utils/firebase"
+import { JSX } from "@babel/types"
 
 type AuthContextProps = {
   currentUser: User | null | undefined
