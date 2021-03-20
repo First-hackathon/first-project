@@ -20,10 +20,10 @@ const TestSnsShareButton: React.FC = () => {
         title={"Lives&Lives"}
         meta={[
           { name: "twitter:card", content: "summary_large_image" },
-          { name: "twitter:site", content: "@IkkoKojima" },
-          { name: "twitter:creator", content: "@IkkoKojima" },
+          { name: "twitter:site", content: "@sota35163013" },
+          { name: "twitter:creator", content: "@sota35163013" },
           { property: "og:title", content: "Lives&Lives" },
-          { property: "og:type", content: "website" },
+          { property: "og:type", content: "article" },
           { property: "og:url", content: currentUrl },
           { property: "og:image", content: imgUrl },
           { property: "og:description", content: "動物たちのイキイキとした姿をみんなで観察" }
