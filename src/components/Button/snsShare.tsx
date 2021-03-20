@@ -56,9 +56,5 @@ export const SnsShareButton: React.FC<Props> = ({ url, snsType, quote, title }) 
       )
       break
   }
-  return (
-    <>
-      <div>{SNSButton}</div>
-    </>
-  )
+  return <>{SNSButton}</>
 }

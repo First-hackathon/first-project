@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import { SnsShareButton, SnsType } from "../components/Button/snsShare"
-import { Helmet } from "react-helmet"
 import { useRouter } from "next/router"
 
 const TestSnsShareButton: React.FC = () => {
@@ -16,19 +15,6 @@ const TestSnsShareButton: React.FC = () => {
 
   return (
     <>
-      <Helmet
-        title={"Lives&Lives"}
-        meta={[
-          { name: "twitter:card", content: "summary_large_image" },
-          { name: "twitter:site", content: "@IkkoKojima" },
-          { name: "twitter:creator", content: "@IkkoKojima" },
-          { property: "og:title", content: "Lives&Lives" },
-          { property: "og:type", content: "website" },
-          { property: "og:url", content: currentUrl },
-          { property: "og:image", content: imgUrl },
-          { property: "og:description", content: "動物たちのイキイキとした姿をみんなで観察" }
-        ]}
-      />
       <div className={"flex"}>
         <img src={imgUrl} alt="alt-text" style={{ width: "600px" }} />
         <SnsShareButton url={currentUrl} snsType={SnsType.Twitter} />
