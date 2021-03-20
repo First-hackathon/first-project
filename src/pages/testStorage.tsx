@@ -64,6 +64,11 @@ const TestStorage: React.FC = () => {
       <br />
       <p>上の画像はstorageにアップロードされたものをurlで表示させている</p>
       <br />
+      <br />
+      <br />
+      <a href={imageUrl} download>
+        この画像をダウンロードする
+      </a>
     </div>
   )
 }
