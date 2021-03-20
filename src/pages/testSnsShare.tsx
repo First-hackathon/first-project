@@ -18,9 +18,12 @@ const TestSnsShareButton: React.FC = () => {
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="twitter:site" content="@sota35163013" />
         <meta property="og:image" key="ogImage" content={imgUrl} />
         <meta name="twitter:card" key="twitterCard" content="summary_large_image" />
         <meta name="twitter:image" key="twitterImage" content={currentUrl} />
+        <meta name="twitter:title" content="テストテストテストテストテストテスト" />
+        <meta name="description" content="テストテストテストテストテストテスト" />
       </Head>
       <div className={"flex"}>
         <img src={imgUrl} alt="alt-text" style={{ width: "600px" }} />
