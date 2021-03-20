@@ -1,5 +1,8 @@
 import { Url } from "./utils"
 
+/**
+ * PCモデル
+ */
 export type Pc = {
   /** pcのID **/
   id: string
