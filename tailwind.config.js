@@ -11,7 +11,8 @@ module.exports = {
         orange: "#F98A2C",
         yellow: "#FFB829",
         pink: "#E53170",
-        gray: "#737373"
+        gray: "#737373",
+        lightGray: "#d7dcde"
       }
     }
   }
