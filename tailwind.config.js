@@ -6,10 +6,13 @@ module.exports = {
   plugins: [],
   theme: {
     extend: {
-      // example
       colors: {
         "light-blue": colors.lightBlue,
-        cyan: colors.cyan
+        cyan: colors.cyan,
+        orange: "#F98A2C",
+        yellow: "#FFB829",
+        pink: "#E53170",
+        gray: "#737373"
       }
     }
   }
