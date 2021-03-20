@@ -28,6 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "autoprefixer": "^10.0.4",
+    "babel-plugin-inline-react-svg": "^2.0.1",
     "eslint": "^7.14.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
@@ -39,6 +40,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-optimized-images": "^2.6.2",
     "path": "^0.12.7",
+    "interactjs": "^1.10.8",
     "postcss": "^8.1.10",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
@@ -47,7 +49,8 @@
     "react-spinners": "^0.10.4",
     "styled-components": "^5.2.1",
     "tailwindcss": "^2.0.1",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.2",
+    "url-loader": "^4.1.1"
   },
   "husky": {
     "hooks": {
