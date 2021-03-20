@@ -1,6 +1,5 @@
 import React from "react"
 import Header from "../../components/header"
-import Image from "next/image"
 import { SupportersList } from "../../components/SupportersList"
 import { SupporterMock } from "../test/supportersList"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
@@ -20,7 +19,6 @@ const Index: React.VFC = () => {
             画像をダウンロードすることもできます
           </p>
           <div className="flex justify-center">
-            {/* <Image src={"/icon/twitterShareIcon.svg"} width={40} height={40} /> */}
             {/* TODO: ここにPCIDから生成したURLを入れる */}
             <SnsShareButton url="/icon/twitterShareIcon.svg" snsType={SnsType.Twitter} />
             {/* <Image src={"/icon/shareUrlIcon.svg"} width={40} height={40} /> */}
