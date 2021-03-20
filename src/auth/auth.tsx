@@ -1,7 +1,7 @@
 import { User } from "firebase/auth/dist/index.esm"
 import React, { createContext, useEffect, useState } from "react"
 
-import firebase from "../utils/firebase"
+import { auth } from "../utils/firebase"
 import { JSX } from "@babel/types"
 
 type AuthContextProps = {
@@ -19,7 +19,7 @@ const Auth: React.VFC<Props> = ({ children }) => {
 
   useEffect(() => {
     // ログイン状態が変化するとfirebaseのauthメソッドを呼び出す
-    firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       setCurrentUser(user)
     })
   }, [])
