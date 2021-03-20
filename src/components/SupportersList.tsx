@@ -8,17 +8,23 @@ type SupporterType = {
 }
 
 const Supporter: React.VFC<SupporterType> = ({ thumbnail, date, name }: SupporterType) => {
+  const dateValue =
+    date.getFullYear() +
+    "/" +
+    ("00" + (date.getMonth() + 1)).slice(-2) +
+    "/" +
+    ("00" + date.getDate()).slice(-2)
   return (
     <li className="flex">
       <img src={thumbnail} alt={name} />
       <p>{name}</p>
-      <p>{date}</p>
+      <p>{dateValue}</p>
     </li>
   )
 }
 
-type Props = SupporterType[]
-export const SupportersList: React.VFC<Props> = (users: Props) => {
+type Props = { users: SupporterType[] }
+export const SupportersList: React.VFC<Props> = ({ users }: Props) => {
   return (
     <>
       <h3>応援してくれた人</h3>
