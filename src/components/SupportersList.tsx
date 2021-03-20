@@ -33,7 +33,7 @@ export const SupportersList: React.VFC<Props> = ({ users }: Props) => {
           <Supporter thumbnail={user.thumbnail} name={user.name} date={user.date} key={i} />
         ))}
       </ul>
-      <p className="mt-14 text-center text-xl text-gray font-semibold tracking-wider">
+      <p className="mt-14 mb-20 text-center text-xl text-gray font-semibold tracking-wider">
         合計 {users.length}人
       </p>
     </>
