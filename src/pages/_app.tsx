@@ -1,8 +1,16 @@
 import "../styles/index.css"
+import React from "react"
 import PropTypes from "prop-types"
+import { Auth } from "../auth/auth"
 
 const MyApp: React.VFC<{ Component: any; pageProps: any }> = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Auth>
+        <Component {...pageProps} />
+      </Auth>
+    </>
+  )
 }
 MyApp.propTypes = {
   Component: PropTypes.func,
