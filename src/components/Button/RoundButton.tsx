@@ -1,4 +1,5 @@
 import React from "react"
+import { BeatLoader } from "react-spinners"
 
 type Props = {
   onClick: Function
@@ -101,6 +102,7 @@ type props = {
   size: RoundedDivSize
   onClick: Function
   isDisabled?: boolean
+  isLoad?: boolean
   text: string
 }
 
@@ -108,10 +110,41 @@ export const RoundedButton: React.FC<props> = ({
   size,
   onClick,
   isDisabled = false,
+  isLoad = false,
   text
 }: props) => {
-  const children = <RoundedDiv size={size} text={text} isDisabled={isDisabled} />
+  if (isLoad) {
+    let heightClass = ""
+    switch (size) {
+      case RoundedDivSize.S:
+        heightClass = "py-2"
+        break
+      case RoundedDivSize.M:
+        heightClass = "py-3"
+        break
+      case RoundedDivSize.L:
+        heightClass = "py-4"
+        break
+    }
+
+    const children = (
+      <div className="relative">
+        <RoundedDiv size={size} text={"\b"} isDisabled={isDisabled} />
+        <div className={`absolute left-0 right-0 mx-auto top-0 ${heightClass}`}>
+          <BeatLoader color="#ffffff" />
+        </div>
+      </div>
+    )
+
+    return (
+      <Button onClick={() => {}} children={children} isDisabled={isDisabled} className="w-full" />
+    )
+  } else {
+    const children = <RoundedDiv size={size} text={text} isDisabled={isDisabled} />
+    return (
+      <Button onClick={onClick} children={children} isDisabled={isDisabled} className="w-full" />
+    )
+  }
 
   // eslint-disable-next-line react/no-children-prop
-  return <Button onClick={onClick} children={children} isDisabled={isDisabled} className="w-full" />
 }
