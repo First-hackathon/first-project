@@ -2,7 +2,7 @@ import { Url } from "./utils"
 
 export type Pc = {
   /** pcのID **/
-  pcId: string
+  id: string
   /** pcの背景 **/
   backgroundType: pcBackgroundType
   /** pcの現在のイメージ画像 **/

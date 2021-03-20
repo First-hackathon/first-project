@@ -6,9 +6,9 @@ import { Pc } from "./pc.model"
  */
 export type User = {
   /** ユーザーID **/
-  userId: string
+  id: string
   /** ユーザー名 **/
-  userName: string
+  name: string
   /** プロフィール **/
   profile?: string
   /** サムネイル画像のURL **/
