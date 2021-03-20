@@ -1,4 +1,4 @@
-import { useEffect, useContext, React } from "react"
+import React, { useEffect, useContext } from "react"
 import Router from "next/router"
 import firebase from "../../utils/firebase"
 import { AuthContext } from "../../auth/auth"

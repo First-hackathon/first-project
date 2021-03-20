@@ -6,7 +6,6 @@ import { Auth } from "../auth/auth"
 const MyApp: React.VFC<{ Component: any; pageProps: any }> = ({ Component, pageProps }) => {
   return (
     <>
-      <Component {...pageProps} />
       <Auth>
         <Component {...pageProps} />
       </Auth>
