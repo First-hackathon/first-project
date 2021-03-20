@@ -2,7 +2,7 @@ import React from "react"
 export const Footer: React.FC = () => {
   return (
     <>
-      <div className="w-full bg-lightGray pt-16">
+      <div className="w-full bg-gray-light pt-16">
         <div className="max-w-md mx-auto text-center">
           {/* TODO: ロゴを追加する */}
           <img src="" alt="ロゴ" className="mb-6 mx-auto" />
