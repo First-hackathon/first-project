@@ -1,10 +1,11 @@
 import { useRouter } from "next/router"
 import StripeAPI from "stripe"
 import axios from "axios"
+import React from "react"
 
 const hostUrl = "http://localhost:3000"
 
-const ProviderRegister: React.VFC<null> = () => {
+const Index: React.VFC<null> = () => {
   const router = useRouter()
 
   // HACK: StripeのSDK(import Stripe from "stripe")でうまく送信できないのでaxiosを使用
@@ -60,7 +61,7 @@ const ProviderRegister: React.VFC<null> = () => {
   const getDashboardUrl = async () => {
     try {
       //TODO: DBからfirebase idに紐づいているstripe idをとってくる, 下のidは入れ替え
-      const id = "acct_1IWDvIPtFr4bVSKg"
+      const id = "acct_1IWG3iPwhcz9FWG1"
 
       const response = await axiosInstance.post(
         `https://api.stripe.com/v1/accounts/${id}/login_links`
@@ -96,4 +97,4 @@ const ProviderRegister: React.VFC<null> = () => {
   )
 }
 
-export default ProviderRegister
+export default Index
