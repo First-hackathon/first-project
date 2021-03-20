@@ -6,7 +6,11 @@ export const Footer: React.FC = () => {
         <div className="max-w-md mx-auto text-center">
           {/* TODO: ロゴを追加する */}
           <img src="" alt="ロゴ" className="mb-6 mx-auto" />
-          <p>「小さなステッカーで大きなクリエイター経済を回す」プロジェクト。</p>
+          <p className="text-left text-gray">
+            「小さなステッカーで大きなクリエイター経済を回す」
+            <br />
+            プロジェクト。
+          </p>
         </div>
       </div>
       <div className="w-full bg-orange h-16 py-2.5">
