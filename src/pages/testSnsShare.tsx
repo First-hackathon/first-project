@@ -28,7 +28,6 @@ const TestSnsShareButton: React.FC = () => {
         <meta name="description" content="テストテストテストテストテストテスト" />
       </Head>
       <div className={"flex"}>
-        <img src={imgUrl} alt="alt-text" style={{ width: "600px" }} />
         <img src={imgUrlSecond} alt="alt-text" style={{ width: "600px" }} />
         <SnsShareButton url={currentUrl} snsType={SnsType.Twitter} title={"OGP test"} />
         <SnsShareButton url={currentUrl} snsType={SnsType.Facebook} quote={"OGP test"} />
