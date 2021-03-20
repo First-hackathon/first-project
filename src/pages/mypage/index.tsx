@@ -68,6 +68,7 @@ const Index: React.FC = () => {
               className={"border border-solid border-lightgray w-full rounded-md"}
               cols={200}
               placeholder={"プロフィール入力"}
+              value={profileInput}
             />
           ) : (
             <>
