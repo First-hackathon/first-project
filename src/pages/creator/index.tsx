@@ -4,7 +4,7 @@ import axios from "axios"
 import React from "react"
 
 const Index: React.VFC<null> = () => {
-  const hostName = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"
+  const hostName = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "http://localhost:3000"
 
   const router = useRouter()
 

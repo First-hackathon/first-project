@@ -27,7 +27,7 @@ const CardForm: React.VFC<{}> = () => {
   const elements = useElements()
   const [loading, setLoading] = React.useState<boolean>(false)
   const [buttonMessage, setButtonMessage] = React.useState<string>("PAY NOW")
-  const hostName = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"
+  const hostName = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "http://localhost:3000"
 
   // TODO: 支払い先のaccountIdを設定
   const creatorId = "acct_1IWG3iPwhcz9FWG1"
