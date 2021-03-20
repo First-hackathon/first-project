@@ -12,6 +12,13 @@ const Index: React.FC = () => {
       padding-left: 0.75rem;
     }
   `
+  const TextBox = styled.textarea`
+    &::placeholder {
+      color: #a7a7a7;
+      font-size: 1rem;
+      padding-left: 0.75rem;
+    }
+  `
   // TODO:データベースが出来次第使用
   const [nameInput, nameSetInput] = useState<string>()
   // TODO:データベースが出来次第使用
@@ -29,7 +36,7 @@ const Index: React.FC = () => {
   return (
     <>
       <div className={"flex justify-center"}>
-        <div className={"flex justify-center"}>
+        <div className={"flex justify-center h-40"}>
           <Image src={"/images/icon/profileImage.svg"} alt={"pen"} width={140} height={140} />
           <div className={"pb-4 pr-4"}>
             <EditButton edit={imageEditState} setter={setImageEditSetter} />
@@ -37,29 +44,30 @@ const Index: React.FC = () => {
         </div>
         <div className={"pl-8 w-2/5"}>
           <div className={"flex"}>
-            <h1 className={"text-2xl mr-4"}>ユーザー名</h1>
+            <p className={"text-2xl mr-4 font-bold"}>ユーザー名</p>
             <EditButton edit={userEditState} setter={setUserEditSetter} />
           </div>
           {userEditState ? (
             <InputBox
               type={"text"}
-              className={"border border-solid border-lightgray w-1/2 h-10 rounded-md"}
+              className={"border border-solid border-lightgray w-4/5 h-10 rounded-md"}
               placeholder={"名前を入力"}
               value={nameInput}
             />
           ) : (
-            <p className={"text-gray text-3xl"}>ステッカーズ・ボブ</p>
+            <p className={"text-gray text-3xl font-bold"}>ステッカーズ・ボブ</p>
           )}
           <div className={"flex pt-6"}>
-            <h1 className={"text-2xl mr-4"}>プロフィール</h1>
+            <p className={"text-2xl mr-4 font-bold"}>プロフィール</p>
             <EditButton edit={profileEditState} setter={setEditSetter} />
           </div>
           {profileEditState ? (
-            <InputBox
-              type={"text"}
-              className={"border border-solid border-lightgray w-3/4 h-20 rounded-md"}
-              placeholder={"プロフィールを入力"}
-              value={profileInput}
+            <TextBox
+              name={"プロフィール"}
+              rows={6}
+              className={"border border-solid border-lightgray w-full rounded-md"}
+              cols={200}
+              placeholder={"プロフィール入力"}
             />
           ) : (
             <>
