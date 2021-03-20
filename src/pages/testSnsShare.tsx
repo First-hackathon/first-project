@@ -5,7 +5,7 @@ import React from "react"
 
 const TestSnsShareButton: React.FC = () => {
   const router = useRouter()
-  const baseUrl = "http://stickers-staging.vercel.app"
+  const baseUrl = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "http://localhost:3000"
   const currentUrl: string = baseUrl + router.pathname
   const image1 = "https://images-na.ssl-images-amazon.com/images/I/615Czv1hTLL.jpg"
   return (
