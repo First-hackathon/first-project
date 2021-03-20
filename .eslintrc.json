@@ -19,7 +19,6 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/explicit-function-return-type": [
