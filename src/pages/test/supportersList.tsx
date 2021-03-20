@@ -72,6 +72,10 @@ const SupporterMock: SupporterType[] = [
 ]
 
 const Index: React.VFC = () => {
-  return <SupportersList users={SupporterMock} />
+  return (
+    <div className="px-10 pt-10">
+      <SupportersList users={SupporterMock} />
+    </div>
+  )
 }
 export default Index
