@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { SnsShareButton, SnsType } from "../components/Button/snsShare"
 import { Helmet } from "react-helmet"
 import { useRouter } from "next/router"
+import Head from "next/head"
 
 const TestSnsShareButton: React.FC = () => {
   // const [setCurrentUrlState, CurrentUrlState] = useState<string>("")
@@ -16,6 +17,13 @@ const TestSnsShareButton: React.FC = () => {
 
   return (
     <>
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" key="ogImage" content={imgUrl} />
+        <meta name="twitter:card" key="twitterCard" content="summary_large_image" />
+        <meta name="twitter:image" key="twitterImage" content={currentUrl} />
+      </Head>
       <Helmet
         title={"Lives&Lives"}
         meta={[
