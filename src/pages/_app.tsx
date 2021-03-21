@@ -2,13 +2,16 @@ import "../styles/index.css"
 import React from "react"
 import PropTypes from "prop-types"
 import { Auth } from "../auth/auth"
+import { atom, RecoilRoot, useRecoilState } from "recoil"
 
 const MyApp: React.VFC<{ Component: any; pageProps: any }> = ({ Component, pageProps }) => {
   return (
     <>
-      <Auth>
-        <Component {...pageProps} />
-      </Auth>
+      <RecoilRoot>
+        <Auth>
+          <Component {...pageProps} />
+        </Auth>
+      </RecoilRoot>
     </>
   )
 }

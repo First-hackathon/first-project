@@ -34,7 +34,7 @@ type Props = {
  */
 export const Modal: React.VFC<Props> = ({ children, isOpen, onClick, modalSize }: Props) => {
   return (
-    <Div className={`${isOpen ? "fadeIn" : ""}  fixed relative `}>
+    <Div className={`${isOpen ? "" : "hidden"}  fixed relative `}>
       <div
         className="fixed bg-black opacity-40 w-full h-full top-0 left-0 z-50"
         onClick={() => onClick()}

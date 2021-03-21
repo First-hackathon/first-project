@@ -3,12 +3,16 @@ import { useInteractJS } from "../../hooks"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import NextImage from "next/image"
 import { Toast, ToastType } from "../../components/toast"
-import { useRouter } from "next/router"
 import { auth } from "../../utils/firebase"
 import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
+import { useRecoilState, useRecoilValue } from "recoil"
+import { stickerState } from "../../atom/sticker"
+import { useRouter } from "next/router"
 
 const Index: React.VFC<{}> = () => {
+  //TODO: FIXME
+  const sticker = useRecoilValue(stickerState)
   const router = useRouter()
   const [toastMessage, setToastMessage] = useState<string>("")
   const [toastType, setToastType] = useState<ToastType>(ToastType.Notification)
@@ -41,6 +45,10 @@ const Index: React.VFC<{}> = () => {
     setContext(canvasContext)
   })
 
+  useEffect(() => {
+    console.log(sticker)
+  }, [])
+
   const createImage = (url) =>
     new Promise<HTMLImageElement>((resolve, reject) => {
       const image = new Image()
@@ -57,7 +65,6 @@ const Index: React.VFC<{}> = () => {
     ;(async () => {
       if (context !== null) {
         const img = await createImage("/image/stickers-pc.png")
-        console.log(img)
       }
     })()
   }, [context])
@@ -107,6 +114,7 @@ const Index: React.VFC<{}> = () => {
 
   const saveOnClick = () => {
     uploadCanvas()
+    router.push("/supporters")
   }
 
   return (
@@ -151,7 +159,7 @@ const Index: React.VFC<{}> = () => {
 
             <div className="shadow-lg rounded-lg relative w-32 h-32 flex items-center justify-center">
               <div className="w-20 h-20 m-auto">
-                <NextImage src={preview} width={80} height={80} />
+                <img src={preview} width={80} height={80} />
               </div>
             </div>
           </div>
