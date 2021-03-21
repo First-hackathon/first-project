@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import Header from "../../components/header"
@@ -10,6 +11,8 @@ import { useRouter } from "next/router"
 
 const Index: React.VFC<{}> = () => {
   const router = useRouter()
+  const inputOnChange = () => {}
+
   const [image, setImage] = useState<string>()
   const [index, setIndex] = useState(0)
   const [croppedImage, setCroppedImage] = useState()

@@ -16,6 +16,7 @@ import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButt
 import { Toast, ToastType } from "../../components/toast"
 import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
+import { useRouter } from "next/router"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
@@ -30,6 +31,7 @@ const Index: React.VFC<{}> = () => {
 const CardForm: React.VFC<{}> = () => {
   const stripe = useStripe()
   const elements = useElements()
+  const router = useRouter()
   const [loading, setLoading] = React.useState<boolean>(false)
   const [toastMessage, setToastMessage] = useState<string>("")
   const [toastType, setToastType] = useState<ToastType>(ToastType.Notification)
@@ -71,7 +73,7 @@ const CardForm: React.VFC<{}> = () => {
       axiosParams.append(key, customerParams[key])
     })
     let response = await axiosInstance.post("https://api.stripe.com/v1/customers", axiosParams)
-    if (response.status != StatusCodes.OK) {
+    if (response.status !== StatusCodes.OK) {
       setToastType(ToastType.Error)
       setToastMessage(response.data.error)
       setToastState(true)
@@ -90,7 +92,7 @@ const CardForm: React.VFC<{}> = () => {
       axiosParams.append(key, setupIntentParams[key])
     })
     response = await axiosInstance.post("https://api.stripe.com/v1/setup_intents", axiosParams)
-    if (response.status != StatusCodes.OK) {
+    if (response.status !== StatusCodes.OK) {
       setToastType(ToastType.Error)
       setToastMessage(response.data.error)
       setToastState(true)
@@ -161,18 +163,18 @@ const CardForm: React.VFC<{}> = () => {
     axiosParams.append("description", paymentIntentParams.description)
     axiosParams.append(
       "metadata[name]",
-      typeof paymentIntentParams.metadata.name == "number"
+      typeof paymentIntentParams.metadata.name === "number"
         ? paymentIntentParams.metadata.name.toString()
         : paymentIntentParams.metadata.name
     )
     axiosParams.append(
       "metadata[price]",
-      typeof paymentIntentParams.metadata.price == "number"
+      typeof paymentIntentParams.metadata.price === "number"
         ? paymentIntentParams.metadata.price.toString()
         : paymentIntentParams.metadata.price
     )
     response = await axiosInstance.post("https://api.stripe.com/v1/payment_intents", axiosParams)
-    if (response.status != StatusCodes.OK) {
+    if (response.status !== StatusCodes.OK) {
       setToastType(ToastType.Error)
       setToastMessage(response.data.error)
       setToastState(true)
@@ -192,10 +194,7 @@ const CardForm: React.VFC<{}> = () => {
       setLoading(false)
       return
     } else {
-      //TODO: 遷移先で以下のトーストを出す
-      // setToastType(ToastType.Notification);
-      // setToastMessage("決済が完了しました");
-      // setToastState(true);
+      router.replace({ pathname: "/sticker-edit", query: { settlement: true } })
       console.log("決済完了")
     }
 
