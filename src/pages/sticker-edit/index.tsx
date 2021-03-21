@@ -8,9 +8,10 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { stickerState } from "../../atom/sticker"
 
 const Index: React.VFC<{}> = () => {
+  //TODO: FIXME
   const sticker = useRecoilValue(stickerState)
   const interact = useInteractJS()
-  const [preview, setPreview] = useState(sticker)
+  const [preview, setPreview] = useState("/logo/logo.svg")
   const handleChangeFile = (e) => {
     const { files } = e.target
     setPreview(window.URL.createObjectURL(files[0]))
@@ -92,7 +93,6 @@ const Index: React.VFC<{}> = () => {
   }
 
   const saveOnClick = () => {
-    console.log(sticker)
     uploadCanvas()
   }
 
