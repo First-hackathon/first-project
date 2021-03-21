@@ -14,6 +14,8 @@ import { StatusCodes } from "http-status-codes"
 import Image from "next/image"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import { Toast, ToastType } from "../../components/toast"
+import Header from "../../components/header"
+import { Footer } from "../../components/Footer"
 import { useRouter } from "next/router"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
@@ -216,61 +218,66 @@ const CardForm: React.VFC<{}> = () => {
   )
 
   return (
-    <section>
-      <Toast
-        type={toastType}
-        text={toastMessage}
-        isShow={toastState}
-        isShowSetter={setToastState}
-      />
+    <>
+      <Header />
 
-      <h2 className="font-bold text-3xl p-5 text-center">決済</h2>
-      <div className="container mx-auto">
-        <div className="flex items-center justify-center px-5 pb-10 pt-16">
-          <div className="xl:w-1/3 lg:w-1/2 md:w-2/3 w-full mx-auto rounded-lg bg-white shadow-xl py-5 px-10 text-gray-700">
-            <div className="w-full pt-1 pb-5">
-              <div className="text-white overflow-hidden rounded-full w-20 h-20 -mt-16 mx-auto shadow-xl flex justify-center items-center">
-                <Image src="/logo/logo.svg" width={80} height={80} />
-              </div>
-            </div>
-            <div className="mb-6">
-              <label className="font-bold text-sm mb-2 ml-1 text-gray">カード番号</label>
-              <div>
-                <CardNumberElement className="h-10 w-full px-3 py-2.5 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" />
-              </div>
-            </div>
-            <div className="mb-6 -mx-2 flex items-end">
-              <div className="px-2 w-1/2">
-                <label className="font-bold text-sm mb-2 ml-1 text-gray">有効期限</label>
-                <CardExpiryElement className="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer" />
-              </div>
-            </div>
-            <div className="mb-8">
-              <label className="font-bold text-sm mb-2 ml-1 text-gray">セキュリティコード</label>
-              <div>
-                <CardCvcElement className="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" />
-              </div>
-            </div>
+      <section className="mt-32 mb-20">
+        <Toast
+          type={toastType}
+          text={toastMessage}
+          isShow={toastState}
+          isShowSetter={setToastState}
+        />
 
-            <div className="mb-10 flex justify-between">
-              <label className="font-bold text-sm mb-2 ml-1 text-gray">お支払い合計</label>
-              <div>
-                <p className="font-bold text-2xl">{`¥${price}`}</p>
+        <h2 className="font-bold text-3xl p-5 text-center">決済</h2>
+        <div className="container mx-auto">
+          <div className="flex items-center justify-center px-5 pb-10 pt-16">
+            <div className="xl:w-1/3 lg:w-1/2 md:w-2/3 w-full mx-auto rounded-lg bg-white shadow-xl py-5 px-10 text-gray-700">
+              <div className="w-full pt-1 pb-5">
+                <div className="text-white overflow-hidden rounded-full w-20 h-20 -mt-16 mx-auto shadow-xl flex justify-center items-center">
+                  <Image src="/logo/logo.svg" width={80} height={80} />
+                </div>
+              </div>
+              <div className="mb-6">
+                <label className="font-bold text-sm mb-2 ml-1 text-gray">カード番号</label>
+                <div>
+                  <CardNumberElement className="h-10 w-full px-3 py-2.5 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" />
+                </div>
+              </div>
+              <div className="mb-6 -mx-2 flex items-end">
+                <div className="px-2 w-1/2">
+                  <label className="font-bold text-sm mb-2 ml-1 text-gray">有効期限</label>
+                  <CardExpiryElement className="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer" />
+                </div>
+              </div>
+              <div className="mb-8">
+                <label className="font-bold text-sm mb-2 ml-1 text-gray">セキュリティコード</label>
+                <div>
+                  <CardCvcElement className="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" />
+                </div>
+              </div>
+
+              <div className="mb-10 flex justify-between">
+                <label className="font-bold text-sm mb-2 ml-1 text-gray">お支払い合計</label>
+                <div>
+                  <p className="font-bold text-2xl">{`¥${price}`}</p>
+                </div>
               </div>
             </div>
           </div>
+          <div className="mx-auto xl:w-1/3 lg:w-1/2 md:w-2/3 w-full">
+            <RoundedButton
+              isDisabled={!stripe}
+              isLoad={loading}
+              onClick={handleSubmit}
+              text={"支払う"}
+              size={RoundedDivSize.M}
+            />
+          </div>
         </div>
-        <div className="mx-auto xl:w-1/3 lg:w-1/2 md:w-2/3 w-full">
-          <RoundedButton
-            isDisabled={!stripe}
-            isLoad={loading}
-            onClick={handleSubmit}
-            text={"支払う"}
-            size={RoundedDivSize.M}
-          />
-        </div>
-      </div>
-    </section>
+      </section>
+      <Footer />
+    </>
   )
 }
 
