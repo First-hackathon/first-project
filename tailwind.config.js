@@ -6,7 +6,7 @@ module.exports = {
     layers: ["components", "utilities"]
   },
   darkMode: "class",
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
   theme: {
     extend: {
       colors: {
