@@ -1,12 +1,11 @@
-import React from "react"
+import React, { useContext } from "react"
 import Image from "next/image"
-import { useRouter } from "next/router"
+import { AuthContext } from "../auth/auth"
+import Link from "next/link"
 
 const Header: React.VFC<{}> = () => {
   // TODO: ログインの状態をグローバルから渡す
-  const isSignedIn = false
-
-  const router = useRouter()
+  const { currentUser } = useContext(AuthContext)
 
   return (
     <header className="">
@@ -26,24 +25,28 @@ const Header: React.VFC<{}> = () => {
 
       {/* account */}
       <div className="mt-10 absolute top-0 xl:right-20 right-10">
-        {isSignedIn ? (
-          <a href="">
-            {/* TODO: マイページへ遷移 */}
-            <div className="lg:w-16 lg:h-16 w-10 h-10 flex items-center rounded-full">
-              <Image src="/sample/sample-profile.png" width={80} height={80} />
-            </div>
-          </a>
+        {currentUser ? (
+          <Link href="/mypage">
+            <a>
+              {/* TODO: マイページへ遷移 */}
+              <div className="lg:w-16 lg:h-16 w-10 h-10 flex items-center rounded-full">
+                <img src={currentUser.photoURL} width={80} height={80} alt="サムネイル画像" />
+              </div>
+            </a>
+          </Link>
         ) : (
-          <a href="">
-            {/* TODO: Googleサインインへ遷移 */}
-            <div className="lg:w-16 lg:h-16 w-10 h-10 flex items-center">
-              {router.pathname == "/" ? (
-                <Image src="/icon/guest.svg" width={500} height={500} />
-              ) : (
-                <Image src="/icon/guest-black.svg" width={500} height={500} />
-              )}
-            </div>
-          </a>
+          <>
+            {/* <a href=""> */}
+            {/*  /!* TODO: Googleサインインへ遷移 *!/ */}
+            {/*  <div className="lg:w-16 lg:h-16 w-10 h-10 flex items-center"> */}
+            {/*    {router.pathname == "/" ? ( */}
+            {/*      <Image src="/icon/guest.svg" width={500} height={500} /> */}
+            {/*    ) : ( */}
+            {/*      <Image src="/icon/guest-black.svg" width={500} height={500} /> */}
+            {/*    )} */}
+            {/*  </div> */}
+            {/* </a> */}
+          </>
         )}
       </div>
       {/* end account */}
