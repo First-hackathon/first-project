@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import Image from "next/image"
 
 type Props = {
   edit: boolean
@@ -21,13 +22,17 @@ const Button = styled.button`
 export const EditButton: React.FC<Props> = ({ edit, setter }) => {
   let icon
   if (edit) {
-    icon = <img src={require("~/public/images/icon/Check.svg")} alt={"pen"} className={"pr-2"} />
+    icon = <Image src={"/images/icon/Check.svg"} alt={"pen"} width={30} height={30} />
   } else {
-    icon = <img src={require("~/public/images/icon/pencil.svg")} alt={"check"} className={"pr-2"} />
+    icon = <Image src={"/images/icon/pencil.svg"} alt={"check"} width={30} height={30} />
   }
 
   const handleOnClick = () => {
     setter(!edit)
   }
-  return <Button onClick={handleOnClick}>{icon}</Button>
+  return (
+    <Button className={"outline-none"} onClick={handleOnClick}>
+      {icon}
+    </Button>
+  )
 }
