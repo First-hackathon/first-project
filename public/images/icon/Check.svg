@@ -1,4 +1,4 @@
-<svg id="Circle_Button" data-name="Circle Button" xmlns="http://www.w3.org/2000/svg" width="81" height="81" viewBox="0 0 81 81">
+<svg id="Circle_Button" data-name="Circle Button" xmlns="http://www.w3.org/2000/svg" width="51" height="50" viewBox="0 0 51 50">
   <defs>
     <style>
       .cls-1 {
@@ -23,10 +23,10 @@
       }
     </style>
   </defs>
-  <rect id="Area" class="cls-1" width="81" height="81" rx="40.5"/>
-  <g id="Icon" class="cls-2" transform="translate(23.625 23.625)">
-    <rect id="Area-2" data-name="Area" class="cls-3" width="33" height="33" transform="translate(0.375 0.375)"/>
-    <g id="Icon-2" data-name="Icon" transform="translate(5.624 8.438)">
+  <rect id="Area" class="cls-1" width="51" height="50" rx="25"/>
+  <g id="Icon" class="cls-2" transform="translate(14.379 16.758)">
+    <rect id="Area-2" data-name="Area" class="cls-3" width="16" height="16" transform="translate(3.621 0.242)"/>
+    <g id="Icon-2" data-name="Icon" transform="translate(0 0.235)">
       <path id="Path" class="cls-4" d="M25.834,5,10.365,20.469,3.333,13.438" transform="translate(-3.333 -5)"/>
     </g>
   </g>
