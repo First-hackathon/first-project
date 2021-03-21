@@ -12,6 +12,7 @@ const uiConfig = {
   signInSuccessUrl: "/",
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
 }
+import { Footer } from "../components/Footer"
 
 const Index: React.VFC<null> = () => {
   const { currentUser } = useContext(AuthContext)
@@ -161,7 +162,7 @@ const Index: React.VFC<null> = () => {
         <Image src="/decorate/wave-orange2gray.png" width={1920} height={126} />
       </section>
 
-      {/* TODO: フッター追加 */}
+      <Footer />
     </>
   )
 }

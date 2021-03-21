@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import { useInteractJS } from "../../hooks"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import NextImage from "next/image"
+import Header from "../../components/header"
+import { Footer } from "../../components/Footer"
 
 const Index: React.VFC<{}> = () => {
   const interact = useInteractJS()
@@ -88,63 +90,67 @@ const Index: React.VFC<{}> = () => {
   }
 
   return (
-    <section>
-      <div className="container mx-auto">
-        <div>
-          <h2 className="font-bold text-3xl p-5 text-center">ステッカーを貼ろう</h2>
-        </div>
+    <>
+      <Header />
+      <section className="mt-32 mb-20">
+        <div className="container mx-auto">
+          <div>
+            <h2 className="font-bold text-3xl p-5 text-center">ステッカーを貼ろう</h2>
+          </div>
 
-        <div className="flex items-center justify-between">
-          <div className="w-2/3 mb-8">
-            <div className="">
-              <div className="aspect-w-816 aspect-h-571 relative">
-                <div className="xl:w-20 xl:h-20 lg:w-16 lg:h-16 w-14 h-14 flex items-center justify-center">
-                  <img
-                    id="scope"
-                    ref={interact.ref}
-                    src={"/icon/scope.svg"}
-                    style={{
-                      ...interact.style
-                    }}
-                    className="relative z-10"
-                  />
+          <div className="flex items-center justify-between">
+            <div className="w-2/3 mb-8">
+              <div className="">
+                <div className="aspect-w-816 aspect-h-571 relative">
+                  <div className="xl:w-20 xl:h-20 lg:w-16 lg:h-16 w-14 h-14 flex items-center justify-center">
+                    <img
+                      id="scope"
+                      ref={interact.ref}
+                      src={"/icon/scope.svg"}
+                      style={{
+                        ...interact.style
+                      }}
+                      className="relative z-10"
+                    />
+                  </div>
+
+                  <canvas width={816} height={571} className="absolute z-0" id="canvas" />
                 </div>
+              </div>
+            </div>
 
-                <canvas width={816} height={571} className="absolute z-0" id="canvas" />
+            <div className="w-10 h-10">
+              <NextImage src={"/icon/arrow-pink.svg"} width={80} height={80} />
+            </div>
+
+            <div className="shadow-lg rounded-lg relative w-32 h-32 flex items-center justify-center">
+              <div className="w-20 h-20 m-auto">
+                <NextImage src={preview} width={80} height={80} />
               </div>
             </div>
           </div>
 
-          <div className="w-10 h-10">
-            <NextImage src={"/icon/arrow-pink.svg"} width={80} height={80} />
-          </div>
+          <div>
+            <div className="xl:w-1/3 lg:w-1/2 md:w-2/3 w-full mx-auto ">
+              <div className="text-md text-sm text-center mb-4">
+                <p>ポインターを移動して貼る場所を決定します。</p>
+              </div>
 
-          <div className="shadow-lg rounded-lg relative w-32 h-32 flex items-center justify-center">
-            <div className="w-20 h-20 m-auto">
-              <NextImage src={preview} width={80} height={80} />
+              <div className="mb-4">
+                <RoundedButton
+                  size={RoundedDivSize.M}
+                  onClick={() => previewOnClick()}
+                  text={"プレビュー"}
+                />
+              </div>
+
+              <RoundedButton size={RoundedDivSize.M} onClick={() => saveOnClick()} text={"決定"} />
             </div>
           </div>
         </div>
-
-        <div>
-          <div className="xl:w-1/3 lg:w-1/2 md:w-2/3 w-full mx-auto ">
-            <div className="text-md text-sm text-center mb-4">
-              <p>ポインターを移動して貼る場所を決定します。</p>
-            </div>
-
-            <div className="mb-4">
-              <RoundedButton
-                size={RoundedDivSize.M}
-                onClick={() => previewOnClick()}
-                text={"プレビュー"}
-              />
-            </div>
-
-            <RoundedButton size={RoundedDivSize.M} onClick={() => saveOnClick()} text={"決定"} />
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+      <Footer />
+    </>
   )
 }
 

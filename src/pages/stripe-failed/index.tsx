@@ -9,6 +9,8 @@ import { firestore } from "../../utils/firebase"
 import firebase from "firebase/app"
 import { getUser } from "../../repository/userRepository"
 import { User } from "../../model/user.model"
+import Header from "../../components/header"
+import { Footer } from "../../components/Footer"
 
 const Index: React.FC = () => {
   const { currentUser } = useContext(AuthContext)
@@ -89,28 +91,32 @@ const Index: React.FC = () => {
 
   return (
     <>
-      <div className={"pt-6"}>
-        <p className={"text-center text-3xl"}>Stripeアカウント連携が失敗しました</p>
-      </div>
-      <div className={"flex justify-center pt-8"}>
-        <Image src="/image/deniedImage.png" width={523} height={322} />
-      </div>
-      <p className={"text-gray text-center pt-6"}>
-        何か問題が起きたようです
-        <br />
-        もう一度Stripeアカウントの連携を
-        <br />
-        試してみてください
-      </p>
-      <div className={"w-1/5 mx-auto pt-6"}>
-        <RoundedButton
-          size={RoundedDivSize.M}
-          onClick={() => {
-            createAccount()
-          }}
-          text={"Stripeアカウントを連携する"}
-        />
-      </div>
+      <Header />
+      <section className="mt-32 mb-20">
+        <div className={"pt-6"}>
+          <p className={"text-center text-3xl"}>Stripeアカウント連携が失敗しました</p>
+        </div>
+        <div className={"flex justify-center pt-8"}>
+          <Image src="/image/deniedImage.png" width={523} height={322} />
+        </div>
+        <p className={"text-gray text-center pt-6"}>
+          何か問題が起きたようです
+          <br />
+          もう一度Stripeアカウントの連携を
+          <br />
+          試してみてください
+        </p>
+        <div className={"w-1/5 mx-auto pt-6"}>
+          <RoundedButton
+            size={RoundedDivSize.M}
+            onClick={() => {
+              createAccount()
+            }}
+            text={"Stripeアカウントを連携する"}
+          />
+        </div>
+      </section>
+      <Footer />
     </>
   )
 }

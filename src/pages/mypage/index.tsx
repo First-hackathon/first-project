@@ -11,6 +11,7 @@ import { useRouter } from "next/router"
 import axios from "axios"
 import { User } from "../../model/user.model"
 import { firestore } from "../../utils/firebase"
+import { Footer } from "../../components/Footer"
 
 const Index: React.FC = () => {
   const { currentUser } = useContext(AuthContext)
@@ -212,6 +213,7 @@ const Index: React.FC = () => {
           </div>
         )
       ) : null}
+      <Footer />
     </>
   )
 }

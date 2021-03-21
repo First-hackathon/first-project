@@ -9,8 +9,8 @@ const Index: React.VFC = () => {
   return (
     <>
       <Header />
-      <section className="container mx-auto">
-        <div className="mt-32 mb-14 text-center">
+      <section className="container mx-auto mt-32">
+        <div className="mb-14 text-center">
           <h1 className="text-3xl font-bold tracking-wide mb-8">ステッカーズのPC</h1>
           {/* PC */}
           {/* <Image src="ここにfirebaseのURLが入る" /> */}
@@ -19,7 +19,7 @@ const Index: React.VFC = () => {
             好きなデザインを作って応援できます
           </p>
           <div className="flex justify-center">
-            <div className="w-1/5 mx-auto">
+            <div className="mx-auto xl:w-1/3 lg:w-1/2 md:w-2/3 w-full">
               <RoundedButton size={RoundedDivSize.M} onClick={() => {}} text="応援する" />
             </div>
           </div>
