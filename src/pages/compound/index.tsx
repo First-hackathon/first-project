@@ -32,7 +32,7 @@ const Index: React.VFC = () => {
   useEffect(() => {
     ;(async () => {
       if (context !== null) {
-        const img = await createImage("/pc.jpg")
+        const img = await createImage("/stickersPc.png")
         console.log(img)
       }
     })()
@@ -71,7 +71,7 @@ const Index: React.VFC = () => {
           ...interact.style
         }}
       />
-      <canvas width="904" height="600" id="canvas"></canvas>
+      <canvas width="708" height="496" id="canvas"></canvas>
       <button onClick={() => interact.enable()} className={"m-1 p-1 bg-red-400 rounded text-white"}>
         編集
       </button>
