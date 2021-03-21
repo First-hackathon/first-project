@@ -58,7 +58,7 @@ const Index: React.VFC<null> = () => {
               <br />
               することができます。
             </p>
-            {!currentUser && <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />}
+            {!currentUser ? <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} /> : null}
           </div>
         </div>
       </section>

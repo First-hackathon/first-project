@@ -12,10 +12,13 @@ const Header: React.VFC<{}> = () => {
       {/* logo */}
       <div className="absolute mt-10 top-0 xl:left-20 left-10">
         <div className="flex items-center">
-          <div className="lg:w-16 lg:h-16 w-10 h-10 flex items-center">
-            <Image src="/logo/logo.svg" width={80} height={80} />
-          </div>
-
+          <Link href="/">
+            <a>
+              <div className="lg:w-16 lg:h-16 w-10 h-10 flex items-center">
+                <Image src="/logo/logo.svg" width={80} height={80} />
+              </div>
+            </a>
+          </Link>
           <div>
             <h1 className="lg:text-4xl text-2xl font-semibold">Stickers</h1>
           </div>
