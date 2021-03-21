@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors")
+
 module.exports = {
   purge: {
     content: ["./src/pages/**/*.tsx", "./src/components/**/*.tsx"],
@@ -11,7 +13,7 @@ module.exports = {
         orange: "#F98A2C",
         yellow: "#FFB829",
         pink: "#E53170",
-        gray: "#737373",
+        gray: { DEFAULT: "#737373", light: "#d7dcde" },
         whitegray: "#F0F0F0"
       },
       lineHeight: {
