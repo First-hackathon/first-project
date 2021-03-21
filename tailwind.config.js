@@ -19,6 +19,10 @@ module.exports = {
       lineHeight: {
         16: "4rem",
         20: "5rem"
+      },
+      aspectRatio: {
+        816: "816",
+        571: "571"
       }
     }
   }
