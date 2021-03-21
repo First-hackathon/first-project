@@ -23,7 +23,6 @@ type Coordinate = {
  * @param isOpen:　モーダルの開閉状態
  * @param isOpenSetter: モーダルの開閉状態更新メソッド
  * @param children: 選択部分として表示する内容
- * @param onButtonClick: モーダル内のボタンをクリックした時にコールバック関数
  * @param isDisabled: ボタンが押せるかどうかの状態
  */
 export const TrimModal: React.FC<props> = ({
