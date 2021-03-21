@@ -6,13 +6,14 @@ import firebase from "firebase/app"
 import { auth } from "../utils/firebase"
 import { AuthContext } from "../auth/auth"
 import { createUser, getUser } from "../repository/userRepository"
+import { Footer } from "../components/Footer"
+import { User } from "../model/user.model"
 
 const uiConfig = {
   signInFlow: "popup",
   signInSuccessUrl: "/",
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
 }
-import { Footer } from "../components/Footer"
 
 const Index: React.VFC<null> = () => {
   const { currentUser } = useContext(AuthContext)
@@ -27,7 +28,7 @@ const Index: React.VFC<null> = () => {
             id: currentUser.uid,
             name: currentUser.displayName,
             thumbnail: currentUser.photoURL
-          })
+          } as User)
             .then(() => {
               console.log("登録成功")
             })
