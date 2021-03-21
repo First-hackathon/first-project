@@ -39,7 +39,6 @@
     "eslint-plugin-react": "^7.21.5",
     "husky": "^4.3.0",
     "interactjs": "^1.10.8",
-    "next-compose-plugins": "^2.2.1",
     "path": "^0.12.7",
     "postcss": "^8.1.10",
     "prettier": "^2.2.1",

@@ -1,5 +1,4 @@
 const path = require("path")
-const withPlugins = require("next-compose-plugins")
 
 const nextConfig = {
   webpack: (config) => {
@@ -22,14 +21,4 @@ const nextConfig = {
   }
 }
 
-module.exports = withPlugins(
-  [
-    [
-      {
-        handleImages: ["jpeg", "png", "svg", "webp", "ico", "gif"],
-        inlineImageLimit: -1
-      }
-    ]
-  ],
-  nextConfig
-)
+module.exports = nextConfig
