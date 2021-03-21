@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import { useRouter } from "next/router"
+import Link from "next/link"
 
 const Header: React.VFC<{}> = () => {
   // TODO: ログインの状態をグローバルから渡す
@@ -11,17 +12,19 @@ const Header: React.VFC<{}> = () => {
   return (
     <header className="">
       {/* logo */}
-      <div className="absolute mt-10 top-0 xl:left-20 left-10">
-        <div className="flex items-center">
-          <div className="lg:w-16 lg:h-16 w-10 h-10 flex items-center">
-            <Image src="/logo/logo.svg" width={80} height={80} />
-          </div>
+      <Link href="/">
+        <div className="absolute mt-10 top-0 xl:left-20 left-10">
+          <div className="flex items-center">
+            <div className="lg:w-16 lg:h-16 w-10 h-10 flex items-center">
+              <Image src="/logo/logo.svg" width={80} height={80} />
+            </div>
 
-          <div>
-            <h1 className="lg:text-4xl text-2xl font-semibold">Stickers</h1>
+            <div>
+              <h1 className="lg:text-4xl text-2xl font-semibold">Stickers</h1>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
       {/* end logo */}
 
       {/* account */}

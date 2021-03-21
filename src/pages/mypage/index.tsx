@@ -3,6 +3,8 @@ import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButt
 import { EditButton } from "../../components/Button/EditButton"
 import styled from "styled-components"
 import Image from "next/image"
+import Header from "../../components/header"
+import { Footer } from "../../components/Footer"
 
 const Index: React.FC = () => {
   const InputBox = styled.input`
@@ -35,60 +37,65 @@ const Index: React.FC = () => {
 
   return (
     <>
-      <div className={"flex justify-center"}>
-        <div className={"flex justify-center h-40"}>
-          <Image src={"/images/icon/profileImage.svg"} alt={"pen"} width={140} height={140} />
-          <div className={"pb-4 pr-4"}>
-            <EditButton edit={imageEditState} setter={setImageEditSetter} />
+      <Header />
+      <section className="mt-32 mb-20 container mx-auto">
+        <h2 className="font-bold text-3xl p-5 text-center mb-10">マイページ</h2>
+        <div className={"flex justify-center py-10 shadow-lg rounded-lg"}>
+          <div className={"flex justify-center h-40"}>
+            <Image src={"/images/icon/profileImage.svg"} alt={"pen"} width={140} height={140} />
+            <div className={"pb-4 pr-4"}>
+              <EditButton edit={imageEditState} setter={setImageEditSetter} />
+            </div>
+          </div>
+          <div className={"pl-8 w-2/5"}>
+            <div className={"flex"}>
+              <p className={"text-2xl mr-4 font-bold"}>ユーザー名</p>
+              <EditButton edit={userEditState} setter={setUserEditSetter} />
+            </div>
+            {userEditState ? (
+              <InputBox
+                type={"text"}
+                className={"border border-solid border-whitegray w-4/5 h-10 rounded-md"}
+                placeholder={"名前を入力"}
+                value={nameInput}
+              />
+            ) : (
+              <p className={"text-gray text-3xl font-bold"}>{nameInput}</p>
+            )}
+            <div className={"flex pt-6"}>
+              <p className={"text-2xl mr-4 font-bold"}>プロフィール</p>
+              <EditButton edit={profileEditState} setter={setEditSetter} />
+            </div>
+            {profileEditState ? (
+              <TextBox
+                name={"プロフィール"}
+                rows={6}
+                className={"border border-solid border-whitegray w-full rounded-md"}
+                cols={200}
+                placeholder={"プロフィール入力"}
+                value={profileInput}
+              />
+            ) : (
+              <>
+                <p className={"text-gray text-left"}>{profileInput}</p>
+              </>
+            )}
           </div>
         </div>
-        <div className={"pl-8 w-2/5"}>
-          <div className={"flex"}>
-            <p className={"text-2xl mr-4 font-bold"}>ユーザー名</p>
-            <EditButton edit={userEditState} setter={setUserEditSetter} />
-          </div>
-          {userEditState ? (
-            <InputBox
-              type={"text"}
-              className={"border border-solid border-whitegray w-4/5 h-10 rounded-md"}
-              placeholder={"名前を入力"}
-              value={nameInput}
-            />
-          ) : (
-            <p className={"text-gray text-3xl font-bold"}>{nameInput}</p>
-          )}
-          <div className={"flex pt-6"}>
-            <p className={"text-2xl mr-4 font-bold"}>プロフィール</p>
-            <EditButton edit={profileEditState} setter={setEditSetter} />
-          </div>
-          {profileEditState ? (
-            <TextBox
-              name={"プロフィール"}
-              rows={6}
-              className={"border border-solid border-whitegray w-full rounded-md"}
-              cols={200}
-              placeholder={"プロフィール入力"}
-              value={profileInput}
-            />
-          ) : (
-            <>
-              <p className={"text-gray text-left"}>{profileInput}</p>
-            </>
-          )}
+        <p className={"text-gray text-center pt-32"}>
+          応援してもらうにはStripeアカウントが必要です。
+          <br />
+          連携をしてマイPCを作りましょう
+        </p>
+        <div className={"mx-auto xl:w-1/3 lg:w-1/2 md:w-2/3 w-full pt-6"}>
+          <RoundedButton
+            size={RoundedDivSize.M}
+            onClick={() => {}}
+            text={"Stripeアカウントを連携する"}
+          />
         </div>
-      </div>
-      <p className={"text-gray text-center pt-40"}>
-        応援してもらうにはStripeアカウントが必要です。
-        <br />
-        連携をしてマイPCを作りましょう
-      </p>
-      <div className={"w-1/4 mx-auto pt-6"}>
-        <RoundedButton
-          size={RoundedDivSize.M}
-          onClick={() => {}}
-          text={"Stripeアカウントを連携する"}
-        />
-      </div>
+      </section>
+      <Footer />
     </>
   )
 }

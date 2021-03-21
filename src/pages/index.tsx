@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import Header from "../components/header"
+import { Footer } from "../components/Footer"
 
 const Index: React.VFC<null> = () => {
   return (
@@ -130,7 +131,7 @@ const Index: React.VFC<null> = () => {
         <Image src="/decorate/wave-orange2gray.png" width={1920} height={126} />
       </section>
 
-      {/*TODO: フッター追加*/}
+      <Footer />
     </>
   )
 }
