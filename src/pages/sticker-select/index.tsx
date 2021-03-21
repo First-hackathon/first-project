@@ -20,8 +20,10 @@ const Index: React.VFC<{}> = () => {
   const sticker = useRecoilValue(stickerState)
 
   useEffect(() => {
-    setImageList(imageList.concat(croppedImage))
-    console.log(croppedImage)
+    if (croppedImage != undefined) {
+      setImageList(imageList.concat(croppedImage))
+      setCroppedImage(undefined)
+    }
   }, [croppedImage])
 
   // ローカルからイメージを追加する
@@ -42,9 +44,9 @@ const Index: React.VFC<{}> = () => {
   }
 
   const settlementOnClick = () => {
+    // TODO: FIXME
     setSticker(imageList[index])
-    console.log(sticker)
-    // router.push("/settlement")
+    router.push("/settlement")
   }
 
   return (
