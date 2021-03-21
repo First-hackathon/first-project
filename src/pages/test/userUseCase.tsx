@@ -64,7 +64,7 @@ const Index: React.VFC = () => {
       <br />
       <button
         onClick={() => {
-          updateUser(user)
+          updateUser({ name: "田川裕介" })
             .then(() => {
               console.log("成功!!!")
             })

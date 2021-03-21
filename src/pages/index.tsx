@@ -1,9 +1,44 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import Image from "next/image"
 import Header from "../components/header"
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
+import firebase from "firebase/app"
+import { auth } from "../utils/firebase"
+import { AuthContext } from "../auth/auth"
+import { createUser, getUser } from "../repository/userRepository"
+
+const uiConfig = {
+  signInFlow: "popup",
+  signInSuccessUrl: "/",
+  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
+}
 import { Footer } from "../components/Footer"
 
 const Index: React.VFC<null> = () => {
+  const { currentUser } = useContext(AuthContext)
+
+  useEffect(() => {
+    if (currentUser) {
+      // db存在するユーザーか判断する
+      getUser().then((user) => {
+        if (!user) {
+          // ユーザーがdbにいなかったら新規登録
+          createUser({
+            id: currentUser.uid,
+            name: currentUser.displayName,
+            thumbnail: currentUser.photoURL
+          })
+            .then(() => {
+              console.log("登録成功")
+            })
+            .catch((e) => {
+              console.log(e)
+            })
+        }
+      })
+    }
+  }, [currentUser])
+
   return (
     <>
       <section className="relative w-full text-white">
@@ -24,11 +59,7 @@ const Index: React.VFC<null> = () => {
               <br />
               することができます。
             </p>
-
-            {/*TODO: Googleサインインに飛ばす*/}
-            <a className="xl:w-60 w-48 flex items-center" href={""}>
-              <Image src="/image/google-signin.svg" width={1280} height={308} />
-            </a>
+            {!currentUser ? <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} /> : null}
           </div>
         </div>
       </section>
@@ -57,7 +88,7 @@ const Index: React.VFC<null> = () => {
 
       <section className="flex flex-col justify-center">
         <Image src="/decorate/wave-white2orange.png" width={1920} height={140} />
-        {/*description*/}
+        {/* description */}
         <div className="bg-orange text-white">
           <div className="container mx-auto px-5 flex justify-between items-center">
             <div className="mt-10 w-6/12">
@@ -67,7 +98,7 @@ const Index: React.VFC<null> = () => {
                 できること
               </div>
 
-              {/*start fan*/}
+              {/* start fan */}
               <div className="lg:mb-32 mb-15">
                 <div className="xl:text-4xl lg:text-3xl md:text-xl font-semibold lg:mb-20 mb-10">
                   ファン
@@ -97,9 +128,9 @@ const Index: React.VFC<null> = () => {
                   </div>
                 </div>
               </div>
-              {/*end fan*/}
+              {/* end fan */}
 
-              {/*start fan*/}
+              {/* start fan */}
               <div className="lg:mb-32 mb-15">
                 <div className="xl:text-4xl lg:text-3xl md:text-xl font-semibold lg:mb-20 mb-10">
                   クリエイター
@@ -117,7 +148,7 @@ const Index: React.VFC<null> = () => {
                   </div>
                 </div>
               </div>
-              {/*end fan*/}
+              {/* end fan */}
             </div>
 
             <div className="w-5/12">
@@ -126,7 +157,7 @@ const Index: React.VFC<null> = () => {
           </div>
         </div>
 
-        {/*end description*/}
+        {/* end description */}
 
         <Image src="/decorate/wave-orange2gray.png" width={1920} height={126} />
       </section>
