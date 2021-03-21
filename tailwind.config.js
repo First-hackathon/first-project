@@ -13,7 +13,7 @@ module.exports = {
         orange: "#F98A2C",
         yellow: "#FFB829",
         pink: "#E53170",
-        gray: "#737373"
+        gray: { DEFAULT: "#737373", light: "#d7dcde" }
       },
       lineHeight: {
         16: "4rem",
