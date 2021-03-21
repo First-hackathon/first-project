@@ -4,7 +4,9 @@ import axios from "axios"
 import React from "react"
 
 const Index: React.VFC<null> = () => {
-  const hostName = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "http://localhost:3000"
+  const hostName = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : "http://localhost:3000"
 
   const router = useRouter()
 
@@ -33,14 +35,13 @@ const Index: React.VFC<null> = () => {
       })
       let response = await axiosInstance.post("https://api.stripe.com/v1/accounts", axiosParams)
       const account: StripeAPI.Account = response.data
-      //TODO: 全体を状態管理しているやつにstripeのアカウントIDを保存
+      // TODO: 全体を状態管理しているやつにstripeのアカウントIDを保存
 
       // アカウント登録リンク生成
-      //TODO: refresh_urlとreturn_urlを設定
       const linkParams: StripeAPI.AccountLinkCreateParams = {
         account: account.id,
-        refresh_url: `${hostName}/reauth`,
-        return_url: `${hostName}/return`,
+        refresh_url: `${hostName}/stripe-failed`,
+        return_url: `${hostName}/mypage`,
         type: "account_onboarding"
       }
       axiosParams = new URLSearchParams()
@@ -50,7 +51,7 @@ const Index: React.VFC<null> = () => {
       response = await axiosInstance.post("https://api.stripe.com/v1/account_links", axiosParams)
       const accountLink: StripeAPI.AccountLink = response.data
 
-      //リンクへリダイレクト
+      // リンクへリダイレクト
       await router.push(accountLink.url)
     } catch (e) {
       console.log(e)
@@ -60,7 +61,7 @@ const Index: React.VFC<null> = () => {
 
   const getDashboardUrl = async () => {
     try {
-      //TODO: DBからfirebase idに紐づいているstripe idをとってくる, 下のidは入れ替え
+      // TODO: DBからfirebase idに紐づいているstripe idをとってくる, 下のidは入れ替え
       const id = "acct_1IWG3iPwhcz9FWG1"
 
       const response = await axiosInstance.post(
