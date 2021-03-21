@@ -24,7 +24,7 @@ const Index: React.VFC<null> = () => {
               することができます。
             </p>
 
-            {/*TODO: Googleサインインに飛ばす*/}
+            {/* TODO: Googleサインインに飛ばす */}
             <a className="xl:w-60 w-48 flex items-center" href={""}>
               <Image src="/image/google-signin.svg" width={1280} height={308} />
             </a>
@@ -56,7 +56,7 @@ const Index: React.VFC<null> = () => {
 
       <section className="flex flex-col justify-center">
         <Image src="/decorate/wave-white2orange.png" width={1920} height={140} />
-        {/*description*/}
+        {/* description */}
         <div className="bg-orange text-white">
           <div className="container mx-auto px-5 flex justify-between items-center">
             <div className="mt-10 w-6/12">
@@ -66,7 +66,7 @@ const Index: React.VFC<null> = () => {
                 できること
               </div>
 
-              {/*start fan*/}
+              {/* start fan */}
               <div className="lg:mb-32 mb-15">
                 <div className="xl:text-4xl lg:text-3xl md:text-xl font-semibold lg:mb-20 mb-10">
                   ファン
@@ -96,9 +96,9 @@ const Index: React.VFC<null> = () => {
                   </div>
                 </div>
               </div>
-              {/*end fan*/}
+              {/* end fan */}
 
-              {/*start fan*/}
+              {/* start fan */}
               <div className="lg:mb-32 mb-15">
                 <div className="xl:text-4xl lg:text-3xl md:text-xl font-semibold lg:mb-20 mb-10">
                   クリエイター
@@ -116,7 +116,7 @@ const Index: React.VFC<null> = () => {
                   </div>
                 </div>
               </div>
-              {/*end fan*/}
+              {/* end fan */}
             </div>
 
             <div className="w-5/12">
@@ -125,12 +125,12 @@ const Index: React.VFC<null> = () => {
           </div>
         </div>
 
-        {/*end description*/}
+        {/* end description */}
 
         <Image src="/decorate/wave-orange2gray.png" width={1920} height={126} />
       </section>
 
-      {/*TODO: フッター追加*/}
+      {/* TODO: フッター追加 */}
     </>
   )
 }
