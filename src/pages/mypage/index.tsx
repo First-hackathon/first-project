@@ -10,6 +10,7 @@ import StripeAPI from "stripe"
 import { useRouter } from "next/router"
 import axios from "axios"
 import { User } from "../../model/user.model"
+import { firestore } from "../../utils/firebase"
 
 const Index: React.FC = () => {
   const { currentUser } = useContext(AuthContext)
@@ -88,6 +89,8 @@ const Index: React.FC = () => {
       let response = await axiosInstance.post("https://api.stripe.com/v1/accounts", axiosParams)
       const account: StripeAPI.Account = response.data
       // TODO: 全体を状態管理しているやつにstripeのアカウントIDを保存
+      const userRef = firestore.collection("user").doc(user.id)
+      await userRef.set({ stripeAccountId: account.id }, { merge: true })
 
       // アカウント登録リンク生成
       // TODO: refresh_urlとreturn_urlを設定
