@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useEffect, useState } from "react"
-import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import Header from "../../components/header"

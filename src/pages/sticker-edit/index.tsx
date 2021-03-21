@@ -3,7 +3,6 @@ import { useInteractJS } from "../../hooks"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import NextImage from "next/image"
 import { Toast, ToastType } from "../../components/toast"
-import { useRouter } from "next/router"
 import { auth } from "../../utils/firebase"
 import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
@@ -12,7 +11,6 @@ import { stickerState } from "../../atom/sticker"
 import { useRouter } from "next/router"
 
 const Index: React.VFC<{}> = () => {
-  const router = useRouter()
   //TODO: FIXME
   const sticker = useRecoilValue(stickerState)
   const router = useRouter()
