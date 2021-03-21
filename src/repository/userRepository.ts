@@ -17,7 +17,7 @@ export const createUser = async (user: User): Promise<void> => {
  * 値の更新、値の追加をこのメソッドで行う
  */
 
-export const updateUser = async (user: User): Promise<void> => {
+export const updateUser = async (user: Partial<User>): Promise<void> => {
   const authUid = auth.currentUser.uid
   const userRef = firestore.collection("user").doc(authUid)
   await userRef.set(user, { merge: true })
@@ -28,7 +28,7 @@ export const updateUser = async (user: User): Promise<void> => {
  * @return ユーザーのデータ
  */
 export const getUser = async (): Promise<User> => {
-  const authUid = auth.currentUser.uid
+  const authUid = await auth.currentUser.uid
   const userRef = firestore.collection("user").doc(authUid)
   const userData = await userRef.get()
   return userData.data() as User

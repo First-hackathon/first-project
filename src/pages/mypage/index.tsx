@@ -1,10 +1,15 @@
-import React, { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import { EditButton } from "../../components/Button/EditButton"
 import styled from "styled-components"
 import Image from "next/image"
+import Header from "../../components/header"
+import { getUser } from "../../repository/userRepository"
+import { AuthContext } from "../../auth/auth"
 
 const Index: React.FC = () => {
+  const { currentUser } = useContext(AuthContext)
+
   const InputBox = styled.input`
     &::placeholder {
       color: #a7a7a7;
@@ -33,9 +38,21 @@ const Index: React.FC = () => {
   const [profileEditState, setProfileEditState] = useState<boolean>(false)
   const setEditSetter = (isCheckedProfile: boolean) => setProfileEditState(isCheckedProfile)
 
+  useEffect(() => {
+    if (currentUser) {
+      getUser().then((user) => {
+        if (user) {
+          nameSetInput(user.name)
+          setProfileInput(user.profile)
+        }
+      })
+    }
+  }, [currentUser])
+
   return (
     <>
-      <div className={"flex justify-center"}>
+      <Header />
+      <div className={"mt-44 flex justify-center"}>
         <div className={"flex justify-center h-40"}>
           <Image src={"/images/icon/profileImage.svg"} alt={"pen"} width={140} height={140} />
           <div className={"pb-4 pr-4"}>
