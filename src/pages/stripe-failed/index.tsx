@@ -1,8 +1,65 @@
 import React from "react"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import Image from "next/image"
+import StripeAPI from "stripe"
+import { useRouter } from "next/router"
+import axios from "axios"
 
 const Index: React.FC = () => {
+  const hostName = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : "http://localhost:3000"
+
+  const router = useRouter()
+
+  // HACK: StripeのSDK(import Stripe from "stripe")でうまく送信できないのでaxiosを使用
+  // StripeのAPI用のインスタンスを生成
+  const axiosInstance = axios.create({
+    baseURL: hostName,
+    headers: {
+      Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`
+    },
+    timeout: 2000
+  })
+
+  const createAccount = async () => {
+    try {
+      // アカウント作成
+      const createParams: StripeAPI.AccountCreateParams = {
+        type: "express",
+        country: "JP"
+      }
+
+      let axiosParams = new URLSearchParams()
+      Object.keys(createParams).forEach((key) => {
+        axiosParams.append(key, createParams[key])
+      })
+      let response = await axiosInstance.post("https://api.stripe.com/v1/accounts", axiosParams)
+      const account: StripeAPI.Account = response.data
+      // TODO: 全体を状態管理しているやつにstripeのアカウントIDを保存
+
+      // アカウント登録リンク生成
+      const linkParams: StripeAPI.AccountLinkCreateParams = {
+        account: account.id,
+        refresh_url: `${hostName}/stripe-failed`,
+        return_url: `${hostName}/mypage`,
+        type: "account_onboarding"
+      }
+      axiosParams = new URLSearchParams()
+      Object.keys(linkParams).forEach((key) => {
+        axiosParams.append(key, linkParams[key])
+      })
+      response = await axiosInstance.post("https://api.stripe.com/v1/account_links", axiosParams)
+      const accountLink: StripeAPI.AccountLink = response.data
+
+      // リンクへリダイレクト
+      await router.push(accountLink.url)
+    } catch (e) {
+      console.log(e)
+      // TODO: エラーハンドリング
+    }
+  }
+
   return (
     <>
       <div className={"pt-6"}>
@@ -21,7 +78,9 @@ const Index: React.FC = () => {
       <div className={"w-1/5 mx-auto pt-6"}>
         <RoundedButton
           size={RoundedDivSize.M}
-          onClick={() => {}}
+          onClick={() => {
+            createAccount()
+          }}
           text={"Stripeアカウントを連携する"}
         />
       </div>
