@@ -4,13 +4,20 @@ import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButt
 import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
 import { TrimModal } from "../../components/modal/trimModal"
+import { stickerState } from "../../atom/sticker"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import { useRouter } from "next/router"
 
 const Index: React.VFC<{}> = () => {
+  const router = useRouter()
   const [image, setImage] = useState<string>()
   const [index, setIndex] = useState(0)
   const [croppedImage, setCroppedImage] = useState()
   const [imageList, setImageList] = useState<Array<string>>([])
   const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const setSticker = useSetRecoilState(stickerState)
+  const sticker = useRecoilValue(stickerState)
 
   useEffect(() => {
     setImageList(imageList.concat(croppedImage))
@@ -34,7 +41,11 @@ const Index: React.VFC<{}> = () => {
     }
   }
 
-  const settlementOnClick = () => {}
+  const settlementOnClick = () => {
+    setSticker(imageList[index])
+    console.log(sticker)
+    // router.push("/settlement")
+  }
 
   return (
     <>

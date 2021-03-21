@@ -4,10 +4,13 @@ import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButt
 import NextImage from "next/image"
 import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
+import { useRecoilState, useRecoilValue } from "recoil"
+import { stickerState } from "../../atom/sticker"
 
 const Index: React.VFC<{}> = () => {
+  const sticker = useRecoilValue(stickerState)
   const interact = useInteractJS()
-  const [preview, setPreview] = useState("/logo/logo.svg")
+  const [preview, setPreview] = useState(sticker)
   const handleChangeFile = (e) => {
     const { files } = e.target
     setPreview(window.URL.createObjectURL(files[0]))
@@ -20,6 +23,10 @@ const Index: React.VFC<{}> = () => {
     const canvasContext = canvas.getContext("2d")
     setContext(canvasContext)
   })
+
+  useEffect(() => {
+    console.log(sticker)
+  }, [])
 
   const createImage = (url) =>
     new Promise<HTMLImageElement>((resolve, reject) => {
@@ -37,7 +44,6 @@ const Index: React.VFC<{}> = () => {
     ;(async () => {
       if (context !== null) {
         const img = await createImage("/image/stickers-pc.png")
-        console.log(img)
       }
     })()
   }, [context])
@@ -86,6 +92,7 @@ const Index: React.VFC<{}> = () => {
   }
 
   const saveOnClick = () => {
+    console.log(sticker)
     uploadCanvas()
   }
 
@@ -125,7 +132,7 @@ const Index: React.VFC<{}> = () => {
 
             <div className="shadow-lg rounded-lg relative w-32 h-32 flex items-center justify-center">
               <div className="w-20 h-20 m-auto">
-                <NextImage src={preview} width={80} height={80} />
+                <img src={preview} width={80} height={80} />
               </div>
             </div>
           </div>
