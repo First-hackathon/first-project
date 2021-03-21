@@ -1,8 +1,43 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import Image from "next/image"
 import Header from "../components/header"
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
+import firebase from "firebase/app"
+import { auth } from "../utils/firebase"
+import { AuthContext } from "../auth/auth"
+import { createUser, getUser } from "../repository/userRepository"
+
+const uiConfig = {
+  signInFlow: "popup",
+  signInSuccessUrl: "/",
+  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
+}
 
 const Index: React.VFC<null> = () => {
+  const { currentUser } = useContext(AuthContext)
+
+  useEffect(() => {
+    if (currentUser) {
+      // db存在するユーザーか判断する
+      getUser().then((user) => {
+        if (!user) {
+          // ユーザーがdbにいなかったら新規登録
+          createUser({
+            id: currentUser.uid,
+            name: currentUser.displayName,
+            thumbnail: currentUser.photoURL
+          })
+            .then(() => {
+              console.log("登録成功")
+            })
+            .catch((e) => {
+              console.log(e)
+            })
+        }
+      })
+    }
+  }, [currentUser])
+
   return (
     <>
       <section className="relative w-full text-white">
@@ -23,11 +58,7 @@ const Index: React.VFC<null> = () => {
               <br />
               することができます。
             </p>
-
-            {/* TODO: Googleサインインに飛ばす */}
-            <a className="xl:w-60 w-48 flex items-center" href={""}>
-              <Image src="/image/google-signin.svg" width={1280} height={308} />
-            </a>
+            {!currentUser && <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />}
           </div>
         </div>
       </section>
