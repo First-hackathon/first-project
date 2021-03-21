@@ -184,7 +184,7 @@ const Index: React.FC = () => {
 
       {user ? (
         user.stripeAccountId ? (
-          <div className="flex w-1/3 mx-auto pt-6">
+          <div className="flex w-1/3 mx-auto pt-6 mb-10">
             <RoundedButton
               size={RoundedDivSize.M}
               onClick={() => {
@@ -202,7 +202,7 @@ const Index: React.FC = () => {
             />
           </div>
         ) : (
-          <div className={"w-1/4 mx-auto pt-6"}>
+          <div className={"w-1/4 mx-auto pt-6 mb-10"}>
             <RoundedButton
               size={RoundedDivSize.M}
               onClick={() => {
