@@ -60,12 +60,12 @@ export function useInteractJS(position: Partial<typeof initPosition> = initPosit
     ref: interactRef,
     style: {
       transform: `translate3D(${_position.x}px, ${_position.y}px, 0)`,
-      width: "180px",
-      height: "80px",
+      width: "100px",
+      height: "100px",
       position: "absolute" as CSSProperties["position"]
     },
-    width: 180,
-    height: 80,
+    width: 100,
+    height: 100,
     position: _position,
     isEnabled,
     enable: () => setEnable(true),

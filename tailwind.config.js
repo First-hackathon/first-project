@@ -6,7 +6,7 @@ module.exports = {
     layers: ["components", "utilities"]
   },
   darkMode: "class",
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
   theme: {
     extend: {
       colors: {
@@ -19,6 +19,10 @@ module.exports = {
       lineHeight: {
         16: "4rem",
         20: "5rem"
+      },
+      aspectRatio: {
+        816: "816",
+        571: "571"
       }
     }
   }

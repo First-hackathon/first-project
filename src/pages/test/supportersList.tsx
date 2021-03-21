@@ -8,7 +8,7 @@ type SupporterType = {
   date: Date
 }
 
-const SupporterMock: SupporterType[] = [
+export const SupporterMock: SupporterType[] = [
   {
     thumbnail:
       "https://firebasestorage.googleapis.com/v0/b/stickers-hackathon.appspot.com/o/images%2F150x150.png?alt=media&token=9a93007e-2b48-4974-b7f8-879e96f8faa7",
