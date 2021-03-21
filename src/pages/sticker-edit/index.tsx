@@ -2,8 +2,28 @@ import React, { useEffect, useState } from "react"
 import { useInteractJS } from "../../hooks"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import NextImage from "next/image"
+import { Toast, ToastType } from "../../components/toast"
+import { useRouter } from "next/router"
+import { auth } from "../../utils/firebase"
 
 const Index: React.VFC<{}> = () => {
+  const router = useRouter()
+  const [toastMessage, setToastMessage] = useState<string>("")
+  const [toastType, setToastType] = useState<ToastType>(ToastType.Notification)
+  const [toastState, setToastState] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (router.query.settlement) {
+      setToastType(ToastType.Notification)
+      setToastMessage("決済が完了しました")
+      setToastState(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log(auth.currentUser)
+  })
+
   const interact = useInteractJS()
   const [preview, setPreview] = useState("/logo/logo.svg")
   const handleChangeFile = (e) => {
@@ -89,6 +109,12 @@ const Index: React.VFC<{}> = () => {
 
   return (
     <section>
+      <Toast
+        type={toastType}
+        text={toastMessage}
+        isShow={toastState}
+        isShowSetter={setToastState}
+      />
       <div className="container mx-auto">
         <div>
           <h2 className="font-bold text-3xl p-5 text-center">ステッカーを貼ろう</h2>
