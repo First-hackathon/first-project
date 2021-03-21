@@ -12,7 +12,7 @@ module.exports = {
         yellow: "#FFB829",
         pink: "#E53170",
         gray: "#737373",
-        lightgray: "#F0F0F0"
+        whitegray: "#F0F0F0"
       },
       lineHeight: {
         16: "4rem",

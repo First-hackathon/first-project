@@ -50,12 +50,12 @@ const Index: React.FC = () => {
           {userEditState ? (
             <InputBox
               type={"text"}
-              className={"border border-solid border-lightgray w-4/5 h-10 rounded-md"}
+              className={"border border-solid border-whitegray w-4/5 h-10 rounded-md"}
               placeholder={"名前を入力"}
               value={nameInput}
             />
           ) : (
-            <p className={"text-gray text-3xl font-bold"}>ステッカーズ・ボブ</p>
+            <p className={"text-gray text-3xl font-bold"}>{nameInput}</p>
           )}
           <div className={"flex pt-6"}>
             <p className={"text-2xl mr-4 font-bold"}>プロフィール</p>
@@ -65,19 +65,14 @@ const Index: React.FC = () => {
             <TextBox
               name={"プロフィール"}
               rows={6}
-              className={"border border-solid border-lightgray w-full rounded-md"}
+              className={"border border-solid border-whitegray w-full rounded-md"}
               cols={200}
               placeholder={"プロフィール入力"}
               value={profileInput}
             />
           ) : (
             <>
-              <p className={"text-gray text-left"}>
-                クリエーターに向けて「 ステッカー
-                」という形のファンから小さい応援を贈ることができます。
-                <br />
-                クリエーターはステッカーを貼ってもらうPCをバーチャルで作るだけで始めることができます。
-              </p>
+              <p className={"text-gray text-left"}>{profileInput}</p>
             </>
           )}
         </div>
