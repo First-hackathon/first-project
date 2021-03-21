@@ -1,15 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react"
 import { RoundedButton, RoundedDivSize } from "../Button/RoundButton"
-import { Modal } from "./modal"
 import Cropper from "react-easy-crop"
+import Modal from "react-modal"
 
 type props = {
   isOpen: boolean
+  isOpenSetter: Function
   // eslint-disable-next-line no-undef
   // children: JSX.Element | JSX.Element[]
-  onButtonClick: Function
   isDisabled: boolean
   image: string
+  imageSetter: Function
 }
 
 type Coordinate = {
@@ -27,11 +28,11 @@ type Coordinate = {
  */
 export const TrimModal: React.FC<props> = ({
   isOpen,
-  // isOpenSetter,
+  isOpenSetter,
   // children,
-  onButtonClick,
   isDisabled,
-  image
+  image,
+  imageSetter
 }) => {
   const [zoom, setZoom] = useState<number>(1)
   const [rotation, setRotation] = useState<number>(0)
@@ -150,6 +151,8 @@ export const TrimModal: React.FC<props> = ({
     try {
       const croppedImage = await getCroppedImg(image, croppedAreaPixels, rotation)
       setCroppedImage(croppedImage)
+      imageSetter(croppedImage)
+      isOpenSetter(false)
     } catch (e) {
       console.error(e)
     }
@@ -159,11 +162,9 @@ export const TrimModal: React.FC<props> = ({
     setCroppedImageIsCircle(isCircle)
   }, [croppedImage])
 
-  const modalToggleHandler = () => {
-    // isOpenSetter(false)
-  }
   return (
-    <Modal isOpen={isOpen} onClick={modalToggleHandler} modalSize={"max-w-7xl"}>
+    <Modal isOpen={isOpen}>
+      {/*<Modal isOpen={isOpen} onClick={()=>modalToggleHandler()} modalSize={"max-w-7xl"}>*/}
       <>
         <div className="w-full">
           <div className="lg:h-96 md:h-72 h-60 relative mb-6">
