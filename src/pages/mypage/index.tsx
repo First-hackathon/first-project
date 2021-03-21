@@ -180,17 +180,28 @@ const Index: React.FC = () => {
         <br />
         連携をしてマイPCを作りましょう
       </p>
-      <div className={"w-1/4 mx-auto pt-6"}>
-        {user ? (
-          user.stripeCustomerId ? (
+
+      {user ? (
+        user.stripeAccountId ? (
+          <div className="flex w-1/3 mx-auto pt-6">
             <RoundedButton
               size={RoundedDivSize.M}
               onClick={() => {
                 getDashboardUrl()
               }}
-              text={"管理画面を開く"}
+              text={"stripe管理画面を開く"}
             />
-          ) : (
+            <div className="w-1/12" />
+            <RoundedButton
+              size={RoundedDivSize.M}
+              onClick={() => {
+                router.push("/my-pc")
+              }}
+              text={"マイPCをみる"}
+            />
+          </div>
+        ) : (
+          <div className={"w-1/4 mx-auto pt-6"}>
             <RoundedButton
               size={RoundedDivSize.M}
               onClick={() => {
@@ -198,9 +209,9 @@ const Index: React.FC = () => {
               }}
               text={"Stripeアカウントを連携する"}
             />
-          )
-        ) : null}
-      </div>
+          </div>
+        )
+      ) : null}
     </>
   )
 }
