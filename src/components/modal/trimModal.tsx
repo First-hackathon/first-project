@@ -6,7 +6,7 @@ import Cropper from "react-easy-crop"
 type props = {
   isOpen: boolean
   // eslint-disable-next-line no-undef
-  children: JSX.Element | JSX.Element[]
+  // children: JSX.Element | JSX.Element[]
   onButtonClick: Function
   isDisabled: boolean
   image: string
@@ -28,7 +28,7 @@ type Coordinate = {
 export const TrimModal: React.FC<props> = ({
   isOpen,
   // isOpenSetter,
-  children,
+  // children,
   onButtonClick,
   isDisabled,
   image
