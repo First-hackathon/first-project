@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="168" height="168" viewBox="0 0 168 168">
+  <g id="グループ_15" data-name="グループ 15" transform="translate(-327 -360)">
+    <g id="Circle_Button" data-name="Circle Button" transform="translate(327 360)">
+      <rect id="Area" width="168" height="168" rx="84" fill="#e53170"/>
+      <g id="Icon" transform="translate(49.838 49.838)">
+        <rect id="Area-2" data-name="Area" width="69" height="69" transform="translate(0.162 0.162)" fill="#e53170" opacity="0"/>
+        <g id="Icon-2" data-name="Icon" transform="translate(7.822 7.822)">
+          <path id="Path" d="M55.243,18.125v11.47a5.736,5.736,0,0,1-5.736,5.736H9.361a5.736,5.736,0,0,1-5.736-5.736V18.125" transform="translate(-3.625 16.287)" fill="#e53170" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+          <path id="Path-2" data-name="Path" d="M8.458,12.083,22.8,26.422,37.136,12.083" transform="translate(3.012 7.99)" fill="#e53170" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+          <line id="Line" y1="34.412" transform="translate(25.809 0)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
