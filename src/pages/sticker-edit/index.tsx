@@ -6,8 +6,10 @@ import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { stickerState } from "../../atom/sticker"
+import { useRouter } from "next/router"
 
 const Index: React.VFC<{}> = () => {
+  const router = useRouter()
   //TODO: FIXME
   const sticker = useRecoilValue(stickerState)
   const interact = useInteractJS()
@@ -94,6 +96,7 @@ const Index: React.VFC<{}> = () => {
 
   const saveOnClick = () => {
     uploadCanvas()
+    router.push("/supporters")
   }
 
   return (
