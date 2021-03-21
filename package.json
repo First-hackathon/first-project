@@ -18,6 +18,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-easy-crop": "^3.3.2",
+    "react-toast-notifications": "^2.4.3",
     "stripe": "^8.138.0"
   },
   "devDependencies": {
