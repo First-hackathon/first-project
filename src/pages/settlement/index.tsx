@@ -1,4 +1,4 @@
-import { Stripe, loadStripe } from "@stripe/stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
 import {
   CardCvcElement,
   CardExpiryElement,
@@ -9,8 +9,11 @@ import {
 } from "@stripe/react-stripe-js"
 import StripeAPI from "stripe"
 import axios from "axios"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { StatusCodes } from "http-status-codes"
+import Image from "next/image"
+import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
+import { Toast, ToastType } from "../../components/toast"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
@@ -26,7 +29,9 @@ const CardForm: React.VFC<{}> = () => {
   const stripe = useStripe()
   const elements = useElements()
   const [loading, setLoading] = React.useState<boolean>(false)
-  const [buttonMessage, setButtonMessage] = React.useState<string>("PAY NOW")
+  const [toastMessage, setToastMessage] = useState<string>("")
+  const [toastType, setToastType] = useState<ToastType>(ToastType.Notification)
+  const [toastState, setToastState] = useState<boolean>(false)
   const hostName = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "http://localhost:3000"
 
   // TODO: 支払い先のaccountIdを設定
@@ -47,7 +52,6 @@ const CardForm: React.VFC<{}> = () => {
   })
 
   const handleSubmit = async (event) => {
-    setButtonMessage("Processing")
     event.preventDefault()
     setLoading(true)
 
@@ -66,7 +70,9 @@ const CardForm: React.VFC<{}> = () => {
     })
     let response = await axiosInstance.post("https://api.stripe.com/v1/customers", axiosParams)
     if (response.status != StatusCodes.OK) {
-      // TODO: エラーハンドリング
+      setToastType(ToastType.Error)
+      setToastMessage(response.data.error)
+      setToastState(true)
       console.log(response.data.error)
       setLoading(false)
       return
@@ -83,7 +89,9 @@ const CardForm: React.VFC<{}> = () => {
     })
     response = await axiosInstance.post("https://api.stripe.com/v1/setup_intents", axiosParams)
     if (response.status != StatusCodes.OK) {
-      // TODO: エラーハンドリング
+      setToastType(ToastType.Error)
+      setToastMessage(response.data.error)
+      setToastState(true)
       console.log(response.data.error)
       setLoading(false)
       return
@@ -100,7 +108,9 @@ const CardForm: React.VFC<{}> = () => {
       }
     })
     if (resultCardSetup.error) {
-      // TODO: エラーハンドリング
+      setToastType(ToastType.Error)
+      setToastMessage(resultCardSetup.error.message)
+      setToastState(true)
       console.log(resultCardSetup.error)
       setLoading(false)
       return
@@ -161,7 +171,9 @@ const CardForm: React.VFC<{}> = () => {
     )
     response = await axiosInstance.post("https://api.stripe.com/v1/payment_intents", axiosParams)
     if (response.status != StatusCodes.OK) {
-      // TODO: エラーハンドリング
+      setToastType(ToastType.Error)
+      setToastMessage(response.data.error)
+      setToastState(true)
       console.log(response.data.error)
       setLoading(false)
       return
@@ -171,17 +183,21 @@ const CardForm: React.VFC<{}> = () => {
     // 決済確定
     const resultCardPayment = await stripe.confirmCardPayment(paymentIntent.client_secret)
     if (resultCardPayment.error) {
-      // TODO: エラーハンドリング
+      setToastType(ToastType.Error)
+      setToastMessage(resultCardPayment.error.message)
+      setToastState(true)
       console.log(resultCardPayment.error)
       setLoading(false)
       return
     } else {
-      // TODO: 成功時処理
+      //TODO: 遷移先で以下のトーストを出す
+      // setToastType(ToastType.Notification);
+      // setToastMessage("決済が完了しました");
+      // setToastState(true);
       console.log("決済完了")
     }
 
     setLoading(false)
-    setButtonMessage("PAY NOW")
   }
 
   const ErrorMessage = ({ children }) => (
@@ -201,47 +217,61 @@ const CardForm: React.VFC<{}> = () => {
   )
 
   return (
-    <div>
-      <div className="min-w-screen min-h-screen bg-gray-200 flex items-center justify-center px-5 pb-10 pt-16">
-        <div className="w-full mx-auto rounded-lg bg-white shadow-lg p-5 text-gray-700">
-          <div className="w-full pt-1 pb-5">
-            <div className="bg-indigo-500 text-white overflow-hidden rounded-full w-20 h-20 -mt-16 mx-auto shadow-lg flex justify-center items-center">
-              <i className="mdi mdi-credit-card-outline text-3xl" />
+    <section>
+      <Toast
+        type={toastType}
+        text={toastMessage}
+        isShow={toastState}
+        isShowSetter={setToastState}
+      />
+
+      <h2 className="font-bold text-3xl p-5 text-center">決済</h2>
+      <div className="container mx-auto">
+        <div className="flex items-center justify-center px-5 pb-10 pt-16">
+          <div className="xl:w-1/3 lg:w-1/2 md:w-2/3 w-full mx-auto rounded-lg bg-white shadow-xl py-5 px-10 text-gray-700">
+            <div className="w-full pt-1 pb-5">
+              <div className="text-white overflow-hidden rounded-full w-20 h-20 -mt-16 mx-auto shadow-xl flex justify-center items-center">
+                <Image src="/logo/logo.svg" width={80} height={80} />
+              </div>
             </div>
-          </div>
-          <div className="mb-10">
-            <h1 className="text-center font-bold text-xl uppercase">Secure payment info</h1>
-          </div>
-          <div className="mb-3">
-            <label className="font-bold text-sm mb-2 ml-1">Card number</label>
-            <div>
-              <CardNumberElement className="h-10 w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" />
+            <div className="mb-6">
+              <label className="font-bold text-sm mb-2 ml-1 text-gray">カード番号</label>
+              <div>
+                <CardNumberElement className="h-10 w-full px-3 py-2.5 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" />
+              </div>
             </div>
-          </div>
-          <div className="mb-3 -mx-2 flex items-end">
-            <div className="px-2 w-1/2">
-              <label className="font-bold text-sm mb-2 ml-1">Expiration date</label>
-              <CardExpiryElement className="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer" />
+            <div className="mb-6 -mx-2 flex items-end">
+              <div className="px-2 w-1/2">
+                <label className="font-bold text-sm mb-2 ml-1 text-gray">有効期限</label>
+                <CardExpiryElement className="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer" />
+              </div>
             </div>
-          </div>
-          <div className="mb-10">
-            <label className="font-bold text-sm mb-2 ml-1">Security code</label>
-            <div>
-              <CardCvcElement className="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" />
+            <div className="mb-8">
+              <label className="font-bold text-sm mb-2 ml-1 text-gray">セキュリティコード</label>
+              <div>
+                <CardCvcElement className="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" />
+              </div>
             </div>
-          </div>
-          <div>
-            <button
-              disabled={!stripe || loading}
-              onClick={handleSubmit}
-              className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
-            >
-              <i className="mdi mdi-lock-outline mr-1" /> {buttonMessage}
-            </button>
+
+            <div className="mb-10 flex justify-between">
+              <label className="font-bold text-sm mb-2 ml-1 text-gray">お支払い合計</label>
+              <div>
+                <p className="font-bold text-2xl">{`¥${price}`}</p>
+              </div>
+            </div>
           </div>
         </div>
+        <div className="mx-auto xl:w-1/3 lg:w-1/2 md:w-2/3 w-full">
+          <RoundedButton
+            isDisabled={!stripe}
+            isLoad={loading}
+            onClick={handleSubmit}
+            text={"支払う"}
+            size={RoundedDivSize.M}
+          />
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
 
