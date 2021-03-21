@@ -19,4 +19,6 @@ export type User = {
   stripeAccountId?: string
   /** クリエイター用のPC（あればクリエイター） **/
   pc?: Pc
+  /** 残基数  **/
+  numberOfResidue: number
 }

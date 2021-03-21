@@ -1,12 +1,17 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useRouter } from "next/router"
 import Image from "next/image"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
 
 const Index: React.VFC<{}> = () => {
+  const router = useRouter()
   const inputOnChange = () => {}
-  const settlementOnClick = () => {}
+  const settlementOnClick = () => {
+    router.push("/settlement")
+  }
+
   const [index, setIndex] = useState(0)
   const imageList: string[] = ["/logo/logo.svg", "/logo/logo.svg", "/logo/logo.svg"]
 

@@ -2,10 +2,30 @@ import React, { useEffect, useState } from "react"
 import { useInteractJS } from "../../hooks"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import NextImage from "next/image"
+import { Toast, ToastType } from "../../components/toast"
+import { useRouter } from "next/router"
+import { auth } from "../../utils/firebase"
 import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
 
 const Index: React.VFC<{}> = () => {
+  const router = useRouter()
+  const [toastMessage, setToastMessage] = useState<string>("")
+  const [toastType, setToastType] = useState<ToastType>(ToastType.Notification)
+  const [toastState, setToastState] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (router.query.settlement) {
+      setToastType(ToastType.Notification)
+      setToastMessage("決済が完了しました")
+      setToastState(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log(auth.currentUser)
+  })
+
   const interact = useInteractJS()
   const [preview, setPreview] = useState("/logo/logo.svg")
   const handleChangeFile = (e) => {
@@ -91,6 +111,12 @@ const Index: React.VFC<{}> = () => {
 
   return (
     <>
+      <Toast
+        type={toastType}
+        text={toastMessage}
+        isShow={toastState}
+        isShowSetter={setToastState}
+      />
       <Header />
       <section className="mt-32 mb-20">
         <div className="container mx-auto">
