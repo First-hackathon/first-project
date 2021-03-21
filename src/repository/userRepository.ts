@@ -20,7 +20,7 @@ export const createUser = async (user: User): Promise<void> => {
 export const updateUser = async (user: Partial<User>): Promise<void> => {
   const authUid = auth.currentUser.uid
   const userRef = firestore.collection("user").doc(authUid)
-  await userRef.set(user, { merge: true })
+  await userRef.update(user)
 }
 
 /**
