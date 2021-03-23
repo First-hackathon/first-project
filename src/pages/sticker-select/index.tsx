@@ -1,25 +1,27 @@
 import React, { ChangeEvent, useEffect, useState } from "react"
 import Image from "next/image"
-import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
+import { RoundedButton, RoundedDiv, RoundedDivSize } from "../../components/Button/RoundButton"
 import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
 import { TrimModal } from "../../components/modal/trimModal"
-import { stickerState } from "../../atom/sticker"
-import { useRecoilValue, useSetRecoilState } from "recoil"
-import { useRouter } from "next/router"
+import { stickerIsCircleState, stickerState } from "../../atom/sticker"
+import { useSetRecoilState } from "recoil"
+import Link from "next/link"
+
+export type Sticker = {
+  src: string
+  isCircle: boolean
+}
 
 const Index: React.VFC<{}> = () => {
-  const router = useRouter()
-  const inputOnChange = () => {}
-
   const [image, setImage] = useState<string>()
   const [index, setIndex] = useState(0)
   const [croppedImage, setCroppedImage] = useState()
-  const [imageList, setImageList] = useState<Array<string>>([])
+  const [imageList, setImageList] = useState<Array<Sticker>>([])
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const setSticker = useSetRecoilState(stickerState)
-  const sticker = useRecoilValue(stickerState)
+  const setStickerIsCircle = useSetRecoilState(stickerIsCircleState)
 
   useEffect(() => {
     if (croppedImage != undefined) {
@@ -45,11 +47,12 @@ const Index: React.VFC<{}> = () => {
     }
   }
 
-  const settlementOnClick = () => {
-    // TODO: FIXME
-    setSticker(imageList[index])
-    router.push("/settlement")
-  }
+  useEffect(() => {
+    if (imageList.length > 0) {
+      setSticker(imageList[index].src)
+      setStickerIsCircle(imageList[index].isCircle)
+    }
+  }, [imageList, index])
 
   return (
     <>
@@ -76,7 +79,12 @@ const Index: React.VFC<{}> = () => {
                     }}
                   >
                     <div className="w-20 h-20 m-auto">
-                      <img src={img} width={80} height={80} />
+                      <img
+                        src={img.src}
+                        width={80}
+                        height={80}
+                        className={img.isCircle ? "rounded-full" : ""}
+                      />
                     </div>
 
                     <div className="absolute w-8 h-8 -top-3 -left-3">
@@ -91,7 +99,12 @@ const Index: React.VFC<{}> = () => {
                     }}
                   >
                     <div className="w-20 h-20 m-auto">
-                      <img src={img} width={80} height={80} />
+                      <img
+                        src={img.src}
+                        width={80}
+                        height={80}
+                        className={img.isCircle ? "rounded-full" : ""}
+                      />
                     </div>
                   </div>
                 )
@@ -125,14 +138,11 @@ const Index: React.VFC<{}> = () => {
             </div>
           </div>
           {/*end upload button*/}
-
-          <div className="xl:w-1/3 lg:w-1/2 md:w-2/3 w-full mx-auto flex justify-between">
-            <RoundedButton
-              size={RoundedDivSize.M}
-              onClick={() => settlementOnClick()}
-              text={"決済へ進む"}
-            />
-          </div>
+          <Link href="/settlement">
+            <div className="xl:w-1/3 lg:w-1/2 md:w-2/3 w-full mx-auto flex justify-between">
+              <RoundedDiv size={RoundedDivSize.M} text={"決済へ進む"} isDisabled={false} />
+            </div>
+          </Link>
         </div>
 
         <TrimModal

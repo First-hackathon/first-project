@@ -2,6 +2,9 @@ import React, { useCallback, useEffect, useState } from "react"
 import { RoundedButton, RoundedDivSize } from "../Button/RoundButton"
 import Cropper from "react-easy-crop"
 import Modal from "react-modal"
+import { stickerIsCircleState } from "../../atom/sticker"
+import { useSetRecoilState } from "recoil"
+import { Sticker } from "../../pages/sticker-select"
 
 type props = {
   isOpen: boolean
@@ -38,9 +41,7 @@ export const TrimModal: React.FC<props> = ({
   const [crop, setCrop] = useState<Coordinate>({ x: 0, y: 0 })
   const aspect = 1
   const [isCircle, setIsCircle] = useState<boolean>(false)
-  const [croppedImageIsCircle, setCroppedImageIsCircle] = useState<boolean>(false)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-  const [croppedImage, setCroppedImage] = useState(null)
 
   // Cropperに渡す関数
   const onZoomChange = (zoom) => {
@@ -149,17 +150,17 @@ export const TrimModal: React.FC<props> = ({
   const cropImage = useCallback(async () => {
     try {
       const croppedImage = await getCroppedImg(image, croppedAreaPixels, rotation)
-      setCroppedImage(croppedImage)
-      imageSetter(croppedImage)
+      const croppedImageSticker: Sticker = {
+        src: croppedImage as string,
+        isCircle: isCircle
+      }
+      imageSetter(croppedImageSticker)
       isOpenSetter(false)
+      setIsCircle(false)
     } catch (e) {
       console.error(e)
     }
-  }, [croppedAreaPixels, rotation])
-
-  useEffect(() => {
-    setCroppedImageIsCircle(isCircle)
-  }, [croppedImage])
+  }, [croppedAreaPixels, rotation, isCircle])
 
   return (
     <Modal isOpen={isOpen}>

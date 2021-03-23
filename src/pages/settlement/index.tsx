@@ -194,7 +194,7 @@ const CardForm: React.VFC<{}> = () => {
       setLoading(false)
       return
     } else {
-      router.replace({ pathname: "/sticker-edit", query: { settlement: true } })
+      router.push({ pathname: "/sticker-edit", query: { settlement: true } })
       console.log("決済完了")
     }
 
