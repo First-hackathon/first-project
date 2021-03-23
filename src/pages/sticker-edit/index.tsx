@@ -3,39 +3,23 @@ import { useInteractJS } from "../../hooks"
 import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
 import NextImage from "next/image"
 import { Toast, ToastType } from "../../components/toast"
-import { auth } from "../../utils/firebase"
 import Header from "../../components/header"
 import { Footer } from "../../components/Footer"
-import { useRecoilState, useRecoilValue } from "recoil"
-import { stickerState } from "../../atom/sticker"
+import { useRecoilValue } from "recoil"
+import { stickerIsCircleState, stickerState } from "../../atom/sticker"
 import { useRouter } from "next/router"
 
 const Index: React.VFC<{}> = () => {
   //TODO: FIXME
   const sticker = useRecoilValue(stickerState)
+  const stickerIsCircle = useRecoilValue(stickerIsCircleState)
   const router = useRouter()
   const [toastMessage, setToastMessage] = useState<string>("")
   const [toastType, setToastType] = useState<ToastType>(ToastType.Notification)
   const [toastState, setToastState] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (router.query.settlement) {
-      setToastType(ToastType.Notification)
-      setToastMessage("決済が完了しました")
-      setToastState(true)
-    }
-  }, [])
-
-  useEffect(() => {
-    console.log(auth.currentUser)
-  })
-
   const interact = useInteractJS()
-  const [preview, setPreview] = useState("/logo/logo.svg")
-  const handleChangeFile = (e) => {
-    const { files } = e.target
-    setPreview(window.URL.createObjectURL(files[0]))
-  }
+  const [preview, setPreview] = useState(sticker)
+
   // contextを状態として持つ
   const [context, setContext] = useState(null)
   // コンポーネントの初期化完了後コンポーネント状態にコンテキストを登録
@@ -47,6 +31,14 @@ const Index: React.VFC<{}> = () => {
 
   useEffect(() => {
     console.log(sticker)
+  }, [])
+
+  useEffect(() => {
+    if (router.query.settlement) {
+      setToastType(ToastType.Notification)
+      setToastMessage("決済が完了しました")
+      setToastState(true)
+    }
   }, [])
 
   const createImage = (url) =>
@@ -78,10 +70,23 @@ const Index: React.VFC<{}> = () => {
     const img = new Image()
     img.src = preview
     img.onload = () => {
+      context.save()
       let e = document.getElementById("scope")
       const scopeWidth = parseFloat(window.getComputedStyle(e).width)
 
       const diff = (interact.width - scopeWidth) / 2
+
+      if (stickerIsCircle) {
+        context.strokeStyle = "rgba(100, 100, 100, 0)"
+        const radius = interact.width / 2
+        const x = (interact.position.x * 816) / canvasWidth - diff + radius
+        const y = (interact.position.y * 571) / canvasHeight - diff + radius
+        context.beginPath()
+        context.arc(x, y, radius, 0, 2 * Math.PI)
+        context.stroke()
+        context.clip()
+      }
+
       context.drawImage(
         img,
         (interact.position.x * 816) / canvasWidth - diff,
@@ -89,6 +94,9 @@ const Index: React.VFC<{}> = () => {
         interact.width,
         interact.height
       )
+
+      context.restore()
+      console.log("restore")
     }
   }
 
@@ -159,7 +167,13 @@ const Index: React.VFC<{}> = () => {
 
             <div className="shadow-lg rounded-lg relative w-32 h-32 flex items-center justify-center">
               <div className="w-20 h-20 m-auto">
-                <img src={preview} width={80} height={80} />
+                <img
+                  src={preview}
+                  width={80}
+                  height={80}
+                  className={stickerIsCircle ? "rounded-full" : ""}
+                  alt="ステッカー"
+                />
               </div>
             </div>
           </div>

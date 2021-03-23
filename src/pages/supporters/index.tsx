@@ -2,8 +2,9 @@ import React from "react"
 import Header from "../../components/header"
 import { SupportersList } from "../../components/SupportersList"
 import { SupporterMock } from "../test/supportersList"
-import { RoundedButton, RoundedDivSize } from "../../components/Button/RoundButton"
+import { RoundedButton, RoundedDiv, RoundedDivSize } from "../../components/Button/RoundButton"
 import { Footer } from "../../components/Footer"
+import Link from "next/link"
 
 const Index: React.VFC = () => {
   return (
@@ -19,9 +20,11 @@ const Index: React.VFC = () => {
             好きなデザインを作って応援できます
           </p>
           <div className="flex justify-center">
-            <div className="mx-auto xl:w-1/3 lg:w-1/2 md:w-2/3 w-full">
-              <RoundedButton size={RoundedDivSize.M} onClick={() => {}} text="応援する" />
-            </div>
+            <Link href="/sticker-select">
+              <div className="mx-auto xl:w-1/3 lg:w-1/2 md:w-2/3 w-full">
+                <RoundedDiv size={RoundedDivSize.M} text="応援する" isDisabled={false} />
+              </div>
+            </Link>
           </div>
         </div>
         <SupportersList users={SupporterMock} />
